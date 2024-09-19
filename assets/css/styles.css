@@ -202,48 +202,50 @@ img {
   transition: width .3s;
 }
 
-.nav__link:hover::after{
+.nav__link:hover::after {
   width: 60%;
 }
 
-.nav__close{
+.nav__close {
   position: absolute;
   top: 1rem;
   right: 1.5rem;
 }
 
 /* Show menu */
-.show-menu{
+.show-menu {
   top: 0;
 }
+
 /* Add shadow header */
-.shadow-header{
+.shadow-header {
   box-shadow: 0 4px 16px hsla(22, 100%, 8%, .1);
 }
+
 /* Active link */
 
 /*=============== HOME ===============*/
-.home__container{
+.home__container {
   padding-block: 3rem 2rem;
   justify-content: center;
   row-gap: 3.5rem;
 }
 
-.home__data{
+.home__data {
   position: relative;
   text-align: center;
 }
 
-.home__title{
+.home__title {
   font-size: var(--biggest-font-size);
   margin-bottom: 1rem;
 }
 
-.home__description{
-margin-bottom: 2.5rem;
+.home__description {
+  margin-bottom: 2.5rem;
 }
 
-.home__sticker{
+.home__sticker {
   width: 40px;
   rotate: 15deg;
   position: absolute;
@@ -252,14 +254,14 @@ margin-bottom: 2.5rem;
   opacity: .5;
 }
 
-.home__images{
+.home__images {
   position: relative;
   display: grid;
   justify-items: center;
   justify-self: center;
 }
 
-.home__ingredient{
+.home__ingredient {
   width: 60px;
   filter: var(--shadow-small-img);
   position: absolute;
@@ -267,59 +269,59 @@ margin-bottom: 2.5rem;
 }
 
 .home__burger,
-.home__dish{
+.home__dish {
   filter: var(--shadow-small-img);
 }
 
-.home__burger{
+.home__burger {
   width: 280px;
   z-index: 2;
 }
 
-.home__dish{
+.home__dish {
   min-width: initial;
   width: 320px;
   position: absolute;
   bottom: -2.5rem;
 }
 
-.home__potato-1{
+.home__potato-1 {
   left: -1rem;
   top: 0.75rem;
 }
 
-.home__potato-2{
+.home__potato-2 {
   right: -0.75rem;
   bottom: -2rem;
   rotate: 90deg;
 }
 
-.home__tomato-1{
+.home__tomato-1 {
   width: 40px;
   top: -1rem;
   right: 6rem;
 }
 
-.home__tomato-2{
+.home__tomato-2 {
   width: 40px;
   left: 5.5rem;
   bottom: -1.5rem;
 }
 
-.home__lettuce-1{
+.home__lettuce-1 {
   top: 2.5rem;
   right: -2rem;
   transform: scale(-1);
 }
 
-.home__lettuce-2{
+.home__lettuce-2 {
   left: -2rem;
   bottom: 1rem;
 }
 
 /*=============== BUTTON ===============*/
 
-.button{
+.button {
   display: inline-flex;
   background-color: var(--first-color);
   color: var(--title-color);
@@ -329,11 +331,76 @@ margin-bottom: 2.5rem;
   transition: box-shadow .4s;
 }
 
-.button:hover{
+.button:hover {
   box-shadow: 0 8px 24px hsla(22, 100%, 8%, .2);
 }
 
 /*=============== RECIPE ===============*/
+.recipe {
+  overflow: hidden;
+}
+
+.recipe__container {
+  grid-template-columns: .5fr 1fr;
+  column-gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.recipe__image {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.recipe__img {
+  position: absolute;
+  max-width: initial;
+  width: 200px;
+  left: -6rem;
+  filter: var(--shadow-big-img);
+}
+
+
+.recipe__data {
+  display: grid;
+  row-gap: 2rem;
+
+}
+
+.recipe__card {
+  display: flex;
+  align-items: center;
+  column-gap: .5rem;
+}
+
+.recipe__box {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  background-color: var(--first-color);
+  border: 3px solid var(--container-color);
+  border-radius: .75rem;
+  display: grid;
+  place-items: center;
+}
+
+.recipe__box img {
+  width: 50px;
+  filter: var(--shadow-small-img);
+}
+
+.recipe__title {
+  font-size: var(--normal-font-size);
+  margin-bottom: .5rem;
+}
+
+.recipe__description {
+  font-style: var(--small-font-size);
+}
+
+.recipe__card:nth-child(even) .recipe__box {
+  order: 1;
+}
 
 /*=============== POPULAR ===============*/
 
