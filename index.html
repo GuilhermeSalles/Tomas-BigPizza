@@ -327,10 +327,26 @@
       </span>
    </footer>
 
-   <!--========== SCROLL UP ==========-->
-   <a href="#" class="scrollup" id="scroll-up">
-      <i class="ri-arrow-up-line"></i>
+   <!--========== SACOLA ICON ==========-->
+   <a href="#popsular" class="scrollup" id="cart-icon">
+      <i class="ri-shopping-bag-3-fill"></i>
+      <span id="cart-count" class="cart-count">0</span>
    </a>
+
+   <!--========== MODAL ==========-->
+   <div id="cart-modal" class="cart-modal">
+      <div class="cart-modal-content">
+         <span id="close-modal" class="close">&times;</span>
+         <h2>Your Cart</h2>
+         <div id="cart-items" class="cart-items">
+            <!-- Itens adicionados serão exibidos aqui -->
+         </div>
+         <div class="cart-total">
+            <h3>Total: $<span id="cart-total">0</span></h3>
+         </div>
+      </div>
+   </div>
+
 
    <!--=============== SCROLLREVEAL ===============-->
    <script src="assets/js/scrollreveal.min.js"></script>
