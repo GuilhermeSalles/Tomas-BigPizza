@@ -328,7 +328,7 @@
    </footer>
 
    <!--========== SACOLA ICON ==========-->
-   <a href="#popsular" class="scrollup" id="cart-icon">
+   <a href="#popular" class="scrollup" id="cart-icon">
       <i class="ri-shopping-bag-3-fill"></i>
       <span id="cart-count" class="cart-count">0</span>
    </a>
@@ -342,11 +342,36 @@
             <!-- Itens adicionados serão exibidos aqui -->
          </div>
          <div class="cart-total">
-            <h3>Total: $<span id="cart-total">0</span></h3>
+            <h3>Total: £<span id="cart-total">0</span></h3>
+         </div>
+
+         <!-- New Form Fields -->
+         <div class="cart-form">
+            <label for="customer-name">Name:</label>
+            <input type="text" id="customer-name" placeholder="Your Name" required>
+
+            <label for="customer-address">Address:</label>
+            <input type="text" id="customer-address" placeholder="Your Address" required>
+
+            <label for="service-type">Service Type:</label>
+            <select id="service-type">
+               <option value="Delivery">Delivery</option>
+               <option value="Pick-up">Pick-up</option>
+            </select>
+
+            <label for="payment-method">Payment Method:</label>
+            <select id="payment-method">
+               <option value="Bank Transfer">Bank Transfer</option>
+               <option value="Cash">Cash</option>
+            </select>
+
+            <label for="customer-observation">Observation:</label>
+            <textarea id="customer-observation" placeholder="Any details you want to mention..."></textarea>
+
+            <button id="submit-order" class="order-button">Place Order</button>
          </div>
       </div>
    </div>
-
 
    <!--=============== SCROLLREVEAL ===============-->
    <script src="assets/js/scrollreveal.min.js"></script>

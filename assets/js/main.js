@@ -176,3 +176,45 @@ document.querySelectorAll('.popular__button').forEach((button) => {
     addToCart({ name, price, image });
   });
 });
+
+// Enivo pedido
+// Função para enviar o pedido para o WhatsApp
+document.getElementById("submit-order").addEventListener("click", function() {
+  const name = document.getElementById("customer-name").value;
+  const address = document.getElementById("customer-address").value;
+  const serviceType = document.getElementById("service-type").value;
+  const paymentMethod = document.getElementById("payment-method").value;
+  const observation = document.getElementById("customer-observation").value;
+
+  if (!name || !address || cart.length === 0) {
+      alert("Please fill out all required fields and make sure you have items in your cart.");
+      return;
+  }
+
+  const currentDate = new Date().toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric"
+  });
+
+  // Formatando os itens do carrinho
+  const cartItemsText = cart.map(item => `${item.name}: £${item.price} x ${item.quantity}`).join("\n");
+
+  // Mensagem formatada
+  let message = `🗓️ ${currentDate}\n\n🚚 *Service type:* ${serviceType}\n-------------------------------------------\nHello, my name is ${name}, I'd like to place an order.\n📍 *Address:* ${address}\n\n📝 *Products:*\n${cartItemsText}\n\n📝 *Observation:* ${observation}\n\n🧾 *Summary*\n\nSubtotal: £${cartTotal.textContent}\nDelivery: £ 0.00\nTotal: £${cartTotal.textContent}\n\n💲 *Payments:* ${paymentMethod}`;
+
+  // Adiciona os dados da conta bancária se o método de pagamento for "Bank Transfer"
+  if (paymentMethod === "Bank Transfer") {
+      message += `\n\n🏦 *Here are my Nationwide account details:*\n\n*Name:* MR Tomas Recchia\n*Sort code:* 07-04-36\n*Account number:* 26000636`;
+  }
+
+  // Substituir espaços por %20 para conformidade com a URL
+  const whatsappMessage = encodeURIComponent(message);
+
+  // Número do WhatsApp para envio (alterar conforme necessário)
+  const whatsappNumber = "5519983223688"; // Número fictício para exemplo
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+  // Abrir o WhatsApp com a mensagem formatada
+  window.open(whatsappUrl, "_blank");
+});
