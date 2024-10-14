@@ -174,7 +174,7 @@ document.querySelectorAll(".popular__button").forEach((button) => {
     const card = button.closest(".popular__card");
     const name = card.querySelector(".popular__title").textContent.trim();
     const price = parseFloat(
-      card.querySelector(".popular__price").textContent.replace("$", "")
+      card.querySelector(".popular__price").textContent.replace("£", "")
     );
     const image = card.querySelector("img").src;
 
@@ -229,32 +229,53 @@ document.getElementById("submit-order").addEventListener("click", function () {
 });
 // Dados dos itens com suas descrições, ajustando os caminhos das imagens
 const itemInfo = {
-  "Chicken Burger": {
-    img: "assets/img/popular-burger-chicken.png",
+  "Marguerita": {
+    img: "assets/img/Marguerita.png",
     description:
-      "A delicious chicken burger made with a crispy chicken fillet, lettuce, tomato, and mayonnaise on a toasted bun.",
+      "A classic Italian pizza with fresh tomatoes, mozzarella cheese, and a sprinkle of basil leaves. Simple, yet bursting with flavor.",
   },
-  "Meat Burger": {
-    img: "assets/img/popular-burger-meat.png",
+  "Peperoni": {
+    img: "assets/img/Peperoni.png",
     description:
-      "Juicy meat burger with cheddar cheese, lettuce, tomato, pickles, onions, and our signature sauce.",
+      "A flavorful pizza topped with spicy peperoni slices and melted mozzarella cheese, served on a crispy crust. A must-have for peperoni lovers.",
   },
-  "Grill Burger": {
-    img: "assets/img/popular-burger-grill.png",
+  "Calabresa especial": {
+    img: "assets/img/Calabresa-especial.png",
     description:
-      "A grilled burger with smoked bacon, cheddar cheese, barbecue sauce, lettuce, and tomato.",
+      "A savory pizza topped with slices of calabresa sausage, onions, and melted mozzarella, bringing a bold and hearty flavor to every bite.",
   },
-  "Classic Burger": {
-    img: "assets/img/popular-burger-classic.png",
+  "Chicken special": {
+    img: "assets/img/Chicken_special.png",
     description:
-      "Classic burger with a beef patty, cheddar cheese, lettuce, tomato, and ketchup, served on a toasted bun.",
+      "A delicious pizza with seasoned chicken, mozzarella, fresh vegetables, and a hint of garlic. Perfect for those who love chicken with a cheesy twist.",
   },
-  "Big Burger": {
-    img: "assets/img/popular-burger-big.png",
+  "Chicken Hawai BBQ": {
+    img: "assets/img/Chicken-Hawai-BBQ.png",
     description:
-      "Our biggest burger yet, featuring two beef patties, bacon, cheese, lettuce, tomato, onions, and our secret sauce.",
+      "A tropical fusion of flavors featuring tender chicken, barbecue sauce, mozzarella, and sweet pineapple slices. A delightful mix of sweet and savory.",
+  },
+  "Portuguesa especial": {
+    img: "assets/img/Portuguesa-especial.png",
+    description:
+      "A rich combination of mozzarella, ham, onions, black olives, eggs, and a touch of oregano, all on a crispy thin crust. A true Portuguese favorite.",
+  },
+  "Strogonoff special": {
+    img: "assets/img/Strogonoff-special.png",
+    description:
+      "A unique pizza inspired by the famous stroganoff dish, featuring creamy stroganoff sauce, tender beef strips, and mozzarella. A true gourmet experience.",
+  },
+  "Romeu & Julieta": {
+    img: "assets/img/Romeu-Julieta.png",
+    description:
+      "A sweet and savory combination of cheese and guava paste, this dessert pizza is a tribute to the famous Brazilian pairing of 'Romeu e Julieta'.",
+  },
+  "Banana & Nutella": {
+    img: "assets/img/Banana-Nutella.png",
+    description:
+      "A decadent dessert pizza topped with slices of banana and a generous drizzle of Nutella, creating a perfect mix of fruity and chocolatey indulgence.",
   },
 };
+
 
 // Função para abrir o modal com as informações do item
 function openInfoModal(title) {
@@ -296,8 +317,8 @@ document.getElementById("close-info-modal").addEventListener("click", () => {
 });
 
 // Definir horários de abertura e fechamento
-const openingTime = 9; // 9:00 AM
-const closingTime = 22; // 10:00 PM
+const openingTime = 22; // 9:00 AM
+const closingTime = 24; // 10:00 PM
 
 // Verificar horário atual da Irlanda do Norte
 function isWithinOperatingHours() {

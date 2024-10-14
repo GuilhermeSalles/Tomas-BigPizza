@@ -451,7 +451,7 @@ img {
 
 @media (max-width: 480px) {
   .popular__title {
-    max-width: 80px; /* Ajuste a largura para dispositivos ainda menores */
+    max-width: 88px; /* Ajuste a largura para dispositivos ainda menores */
     font-size: 0.875rem; /* Diminui o tamanho da fonte para dispositivos menores */
   }
 }
@@ -1063,7 +1063,7 @@ img {
   color: var(--white-color);
   padding: 1rem;
   border-radius: 50%;
-  z-index: var(--z-fixed);
+  z-index: 99;
   display: flex;
   justify-content: center;
   align-items: center;
