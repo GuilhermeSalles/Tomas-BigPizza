@@ -6,7 +6,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
    <!--=============== FAVICON ===============-->
-   <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+   <link rel="shortcut icon" href="assets/img/icon.png" type="image/x-icon">
 
    <!--=============== REMIXICONS ===============-->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
@@ -14,7 +14,7 @@
    <!--=============== CSS ===============-->
    <link rel="stylesheet" href="assets/css/styles.css">
 
-   <title>Big Pizza - Tomas</title>
+   <title>Big Pizza - UK</title>
 </head>
 
 <body>
@@ -23,15 +23,13 @@
       <nav class="nav container">
          <a href="#" class="nav__logo">
             <div>
-               <img src="assets/img/logo-burger.svg" alt="Logo image">
+               <img src="assets/img/logo.png" alt="Logo image">
             </div>
-
-            Burger
          </a>
          <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
                <li><a href="#home" class="nav__link active-link">Home</a></li>
-               <li><a href="#recipe" class="nav__link">Recipe</a></li>
+               <!-- <li><a href="#recipe" class="nav__link">Recipe</a></li> -->
                <li><a href="#popular" class="nav__link">Popular</a></li>
                <li><a href="#delivery" class="nav__link">Delivery</a></li>
                <li><a href="#contact" class="nav__link">Contact</a></li>
@@ -57,29 +55,28 @@
          <div class="home__container container grid">
             <div class="home__data">
                <h1 class="home__title">
-                  Love Every <br> Burger
+                  Love Every <br> Pizza
                </h1>
                <p class="home__description">
-                  We serve the best burgers on the planet,
-                  paving the way for cooking and preparing
-                  hot, delicious burgers.
+                  We serve the best pizzas on the planet, setting the standard for crafting and baking hot, delicious
+                  pizzas.
                </p>
 
-               <a href="#" class="button">Bite Now</a>
+               <a href="#popular" class="button">Order Now</a>
 
-               <img src="assets/img/sticker-potatoes.svg" alt="image potato frities" class="home__sticker">
+               <img src="assets/img/sticker-pepi.svg" alt="image potato frities" class="home__sticker">
             </div>
 
             <div class="home__images">
-               <img src="assets/img/home-burger.png" alt="image" class="home__burger">
-               <img src="assets/img/home-dish.png" alt="image" class="home__dish">
+               <img src="assets/img/home-pizza.png" alt="image" class="home__burger">
+               <!-- <img src="assets/img/home-dish.png" alt="image" class="home__dish"> -->
 
-               <img src="assets/img/home-potato.png" alt="image" class="home__ingredient home__potato-1">
-               <img src="assets/img/home-potato.png" alt="image" class="home__ingredient home__potato-2">
+               <img src="assets/img/home-cheese.png" alt="image" class="home__ingredient home__potato-1">
+               <img src="assets/img/home-loro.png" alt="image" class="home__ingredient home__potato-2">
                <img src="assets/img/home-tomato.png" alt="image" class="home__ingredient home__tomato-1">
-               <img src="assets/img/home-tomato.png" alt="image" class="home__ingredient home__tomato-2">
-               <img src="assets/img/home-lettuce.png" alt="image" class="home__ingredient home__lettuce-1">
-               <img src="assets/img/home-lettuce.png" alt="image" class="home__ingredient home__lettuce-2">
+               <img src="assets/img/home-peperoni.png" alt="image" class="home__ingredient home__tomato-2">
+               <img src="assets/img/home-cheese.png" alt="image" class="home__ingredient home__lettuce-1">
+               <img src="assets/img/home-loro.png" alt="image" class="home__ingredient home__lettuce-2">
             </div>
 
 
@@ -87,7 +84,7 @@
       </section>
 
       <!--==================== RECIPE ====================-->
-      <section class="recipe section" id="recipe">
+      <!-- <section class="recipe section" id="recipe">
          <h2 class="section__title">Our Secret Recipe</h2>
 
          <div class="recipe__container container grid">
@@ -154,18 +151,21 @@
             </div>
 
          </div>
-      </section>
+      </section> -->
 
       <!--==================== POPULAR ====================-->
       <section class="popular section" id="popular">
-         <h2 class="section__title">Most Devoured <br> Burgers</h2>
+         <h2 class="section__title">Most Devoured <br> Pizzas</h2>
 
          <div class="popular__container container grid">
 
             <article class="popular__card">
                <img src="assets/img/popular-burger-chicken.png" alt="image popular burger" class="popular__img">
+               <button class="info__button">
+                  <i class="ri-information-fill"></i>
+               </button>
 
-               <h2 class="popular__title">Chicken <br> Burger</h2>
+               <h2 class="popular__title">Chicken Burger</h2>
                <span class="popular__price">$6</span>
 
                <button class="popular__button">
@@ -175,8 +175,10 @@
 
             <article class="popular__card">
                <img src="assets/img/popular-burger-meat.png" alt="image popular burger" class="popular__img">
-
-               <h2 class="popular__title">Meat <br> Burger</h2>
+               <button class="info__button">
+                  <i class="ri-information-fill"></i>
+               </button>
+               <h2 class="popular__title">Meat Burger</h2>
                <span class="popular__price">$10</span>
 
                <button class="popular__button">
@@ -186,8 +188,10 @@
 
             <article class="popular__card">
                <img src="assets/img/popular-burger-grill.png" alt="image popular burger" class="popular__img">
-
-               <h2 class="popular__title">Grill <br> Burger</h2>
+               <button class="info__button">
+                  <i class="ri-information-fill"></i>
+               </button>
+               <h2 class="popular__title">Grill Burger</h2>
                <span class="popular__price">$12</span>
 
                <button class="popular__button">
@@ -197,8 +201,10 @@
 
             <article class="popular__card">
                <img src="assets/img/popular-burger-classic.png" alt="image popular burger" class="popular__img">
-
-               <h2 class="popular__title">Classic <br> Burger</h2>
+               <button class="info__button">
+                  <i class="ri-information-fill"></i>
+               </button>
+               <h2 class="popular__title">Classic Burger</h2>
                <span class="popular__price">$8</span>
 
                <button class="popular__button">
@@ -208,8 +214,10 @@
 
             <article class="popular__card">
                <img src="assets/img/popular-burger-big.png" alt="image popular burger" class="popular__img">
-
-               <h2 class="popular__title">Big <br> Burger</h2>
+               <button class="info__button">
+                  <i class="ri-information-fill"></i>
+               </button>
+               <h2 class="popular__title">Big Burger</h2>
                <span class="popular__price">$15</span>
 
                <button class="popular__button">
@@ -219,6 +227,19 @@
          </div>
       </section>
 
+      <!--========== MODAL DE INFORMAÇÕES ==========-->
+      <div id="info-modal" class="cart-modal">
+         <div class="cart-modal-content">
+            <span id="close-info-modal" class="close">&times;</span>
+            <div id="info-modal-content">
+               <img id="info-modal-img" src="" alt="Item Image" class="info-modal-img">
+               <h2 id="info-modal-title"></h2>
+               <p id="info-modal-description"></p>
+            </div>
+         </div>
+      </div>
+
+
       <!--==================== DELIVERY ====================-->
       <section class="delivery section" id="delivery">
          <div class="delivery__container container grid">
@@ -226,17 +247,16 @@
                <h2 class="section__title">Fast Delivery</h2>
 
                <p class="delivery__description">
-                  Place your order foryour favorite burger
-                  and we will deliver it to yuor door inminutes,
-                  get in touch and dont't leave hungry.
+                  Order your favorite pizza, and we’ll have it delivered to your doorstep in no time. Contact us now and
+                  satisfy your cravings!
                </p>
 
-               <a href="#contact" class="button">Contact Now</a>
+               <a href="#popular" class="button">Contact Now</a>
 
                <img src="assets/img/sticker-glass.svg" alt="image glass" class="delivery__sticker">
             </div>
 
-            <img src="assets/img/delivery-burger.png" alt="image burger" class="delivery__img">
+            <img src="assets/img/delivery-pizza.png" alt="image burger" class="delivery__img">
 
          </div>
       </section>
@@ -258,11 +278,7 @@
                         </a>
 
                         <a href="https://m.me/" target="_blank">
-                           <i class="ri-facebook-circle-fill"></i>
-                        </a>
-
-                        <a href="https://t.me/telegram" target="_blank">
-                           <i class="ri-telegram-fill"></i>
+                           <i class="ri-instagram-fill"></i>
                         </a>
 
                      </div>
@@ -294,7 +310,7 @@
                </div>
             </div>
 
-            <img src="assets/img/sticker-burger.svg" alt="image burger" class="contact__sticker-1">
+            <img src="assets/img/sticker-pizza.svg" alt="image burger" class="contact__sticker-1">
             <img src="assets/img/sticker-soda.svg" alt="image soda" class="contact__sticker-2">
          </div>
       </section>
@@ -305,18 +321,15 @@
       <div class="footer__container container grid">
          <a href="" class="footer__logo">Burger</a>
          <div class="footer__content grid">
-            <a href="" class="footer__link">Terms & Agreements</a>
-            <a href="" class="footer__link">Privacy Policy</a>
+            <a href="" class="footer__link" style="visibility: hidden;">Terms & Agreements</a>
+            <a href="" class="footer__link" style="visibility: hidden;">Privacy Policy</a>
 
             <div class="footer__social">
                <a href="#" target="_blank">
-                  <i class="ri-facebook-circle-fill"></i>
+                  <i class="ri-whatsapp-fill"></i>
                </a>
                <a href="#" target="_blank">
                   <i class="ri-instagram-fill"></i>
-               </a>
-               <a href="#" target="_blank">
-                  <i class="ri-twitter-x-fill"></i>
                </a>
             </div>
          </div>
@@ -332,6 +345,18 @@
       <i class="ri-shopping-bag-3-fill"></i>
       <span id="cart-count" class="cart-count">0</span>
    </a>
+
+   <!--========== MODAL DE HORÁRIO ==========-->
+   <div id="status-modal" class="cart-modal">
+      <div class="cart-modal-content">
+         <span id="close-status-modal" class="close">&times;</span>
+         <h2 id="status-modal-title">We are currently closed</h2>
+         <p id="status-modal-description">
+            Our opening hours are from <strong>9:00 AM</strong> to <strong>10:00 PM</strong>.
+            Please visit us during these times.
+         </p>
+      </div>
+   </div>
 
    <!--========== MODAL ==========-->
    <div id="cart-modal" class="cart-modal">
