@@ -322,8 +322,8 @@ document.getElementById("close-info-modal").addEventListener("click", () => {
 });
 
 // Definir horários de abertura e fechamento
-const openingTime = 1; // 9:00 AM
-const closingTime = 22; // 10:00 PM
+const openingTime = 9; // 9:00 AM
+const closingTime = 24; // 10:00 PM
 
 // Verificar horário atual da Irlanda do Norte
 function isWithinOperatingHours() {
