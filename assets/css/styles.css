@@ -441,6 +441,10 @@ img {
   max-width: 120px; /* Limita a largura do título para forçar a quebra */
   display: block;
 }
+.popular__subtitle {
+  text-align: center;
+  font-size: var(--small-font-size);
+}
 
 /* Regras para dispositivos pequenos */
 @media (max-width: 768px) {

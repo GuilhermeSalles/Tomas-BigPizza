@@ -221,7 +221,7 @@ document.getElementById("submit-order").addEventListener("click", function () {
   const whatsappMessage = encodeURIComponent(message);
 
   // Número do WhatsApp para envio (alterar conforme necessário)
-  const whatsappNumber = "5519983223688"; // Número fictício para exemplo
+  const whatsappNumber = "447707763804"; // Número fictício para exemplo
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   // Abrir o WhatsApp com a mensagem formatada
@@ -232,47 +232,52 @@ const itemInfo = {
   "Marguerita": {
     img: "assets/img/Marguerita.png",
     description:
-      "A classic Italian pizza with fresh tomatoes, mozzarella cheese, and a sprinkle of basil leaves. Simple, yet bursting with flavor.",
+      "A classic pizza made with rich tomato sauce, oregano and mozzarella cheese, offering a simple yet timeless flavour.",
   },
   "Peperoni": {
     img: "assets/img/Peperoni.png",
     description:
-      "A flavorful pizza topped with spicy peperoni slices and melted mozzarella cheese, served on a crispy crust. A must-have for peperoni lovers.",
+      "A delicious pizza topped with spicy peperoni slices, oregano, mozzarella cheese, and black olives, all on a tomato base.",
+  },
+  "Pesto & courgette": {
+    img: "assets/img/Pesto.png",
+    description:
+      "A fresh and flavourful pizza featuring a pesto sauce base, oregano, mozzarella cheese, courgettes, and black olives.",
   },
   "Calabresa especial": {
     img: "assets/img/Calabresa-especial.png",
     description:
-      "A savory pizza topped with slices of calabresa sausage, onions, and melted mozzarella, bringing a bold and hearty flavor to every bite.",
-  },
-  "Chicken special": {
-    img: "assets/img/Chicken_special.png",
-    description:
-      "A delicious pizza with seasoned chicken, mozzarella, fresh vegetables, and a hint of garlic. Perfect for those who love chicken with a cheesy twist.",
+      "A savoury pizza with tomato sauce, mozzarella cheese, oregano, special calabresa sausage, onions, and black olives.",
   },
   "Chicken Hawai BBQ": {
     img: "assets/img/Chicken-Hawai-BBQ.png",
     description:
-      "A tropical fusion of flavors featuring tender chicken, barbecue sauce, mozzarella, and sweet pineapple slices. A delightful mix of sweet and savory.",
+      "A tropical BBQ pizza with mozzarella cheese, oregano, shredded chicken, bacon, pineapple, and black olives on a BBQ sauce base.",
   },
-  "Portuguesa especial": {
-    img: "assets/img/Portuguesa-especial.png",
+  "Chicken special": {
+    img: "assets/img/Chicken_special.png",
     description:
-      "A rich combination of mozzarella, ham, onions, black olives, eggs, and a touch of oregano, all on a crispy thin crust. A true Portuguese favorite.",
+      "A hearty pizza with tomato sauce, mozzarella cheese, oregano, shredded chicken, bacon, and black olives.",
   },
   "Strogonoff special": {
     img: "assets/img/Strogonoff-special.png",
     description:
-      "A unique pizza inspired by the famous stroganoff dish, featuring creamy stroganoff sauce, tender beef strips, and mozzarella. A true gourmet experience.",
+      "Inspired by the famous stroganoff dish, this pizza comes with mozzarella cheese, oregano, minced beef in a creamy sauce, crispy potato sticks, and black olives.",
+  },
+  "Portuguesa especial": {
+    img: "assets/img/Portuguesa-especial.png",
+    description:
+      "A traditional Portuguese pizza with tomato sauce, mozzarella cheese, ham, palm hearts, oregano, fresh tomatoes, egg, onions, oregano, and black olives.",
   },
   "Romeu & Julieta": {
     img: "assets/img/Romeu-Julieta.png",
     description:
-      "A sweet and savory combination of cheese and guava paste, this dessert pizza is a tribute to the famous Brazilian pairing of 'Romeu e Julieta'.",
+      "A sweet and savoury dessert pizza topped with mozzarella cheese, homemade fresh cheese, and guava paste, perfect for fans of the classic 'Romeo and Juliet' combination.",
   },
   "Banana & Nutella": {
     img: "assets/img/Banana-Nutella.png",
     description:
-      "A decadent dessert pizza topped with slices of banana and a generous drizzle of Nutella, creating a perfect mix of fruity and chocolatey indulgence.",
+      "A rich dessert pizza made with mozzarella cheese, homemade fresh cheese, Nutella spread, and banana slices, offering a delightful mix of fruit and chocolate.",
   },
 };
 
@@ -317,8 +322,8 @@ document.getElementById("close-info-modal").addEventListener("click", () => {
 });
 
 // Definir horários de abertura e fechamento
-const openingTime = 22; // 9:00 AM
-const closingTime = 24; // 10:00 PM
+const openingTime = 1; // 9:00 AM
+const closingTime = 22; // 10:00 PM
 
 // Verificar horário atual da Irlanda do Norte
 function isWithinOperatingHours() {
