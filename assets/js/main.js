@@ -191,6 +191,7 @@ document.getElementById("submit-order").addEventListener("click", function () {
   const observation = document.getElementById("customer-observation").value;
   const deliveryDay = document.getElementById("delivery-day-select").value;
   const deliveryTime = document.getElementById("delivery-time-select").value;
+  const deliveryLocation = document.getElementById("delivery-location-select").value;
   const pickupDay = document.getElementById("pickup-day-select").value;
   const pickupTime = document.getElementById("pickup-time-select").value;
 
@@ -207,23 +208,55 @@ document.getElementById("submit-order").addEventListener("click", function () {
     year: "numeric",
   });
 
+  // Calculando o subtotal do carrinho
+  const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
+  let deliveryFee = 0;
+  let total = subtotal;
+
   // Formatando os itens do carrinho
   const cartItemsText = cart
     .map((item) => `${item.name}: £${item.price} x ${item.quantity}`)
     .join("\n");
 
   // Mensagem inicial
-  let message = `🗓️ ${currentDate}\n\n🚚 *Service type:* ${serviceType}\n-------------------------------------------\nHello, my name is ${name}, I'd like to place an order.\n📍 *Address:* ${address}\n\n📝 *Products:*\n${cartItemsText}\n\n📝 *Observation:* ${observation}\n\n🧾 *Summary*\n\nSubtotal: £${cartTotal.textContent}\nDelivery: £ 0.00\nTotal: £${cartTotal.textContent}\n\n💲 *Payments:* ${paymentMethod}`;
+  let message = `🗓️ ${currentDate}\n\n🚚 *Service type:* ${serviceType}\n-------------------------------------------\nHello, my name is ${name}, I'd like to place an order.\n📍 *Address:* ${address}\n\n📝 *Products:*\n${cartItemsText}\n\n📝 *Observation:* ${observation}`;
 
-  // Se o serviço for "Delivery", adiciona o dia e horário de entrega
+  // Se o serviço for "Delivery", adiciona o dia e horário de entrega e calcula o valor de entrega
   if (serviceType === "Delivery") {
-    message += `\n\n📅 *Delivery Day:* ${deliveryDay}\n🕒 *Delivery Time:* ${deliveryTime}\n\n❓ *What is the delivery fee for my address?*`;
+    message += `\n\n📅 *Delivery Day:* ${deliveryDay}\n🕒 *Delivery Time:* ${deliveryTime}`;
+
+    if (deliveryLocation === 'Portadown') {
+      deliveryFee = 5.00;
+      message += `\n\n🚚 *Delivery Location:* Portadown\nDelivery Fee: £${deliveryFee.toFixed(2)}`;
+    } else if (deliveryLocation === 'Lugan') {
+      deliveryFee = 5.00;
+      message += `\n\n🚚 *Delivery Location:* Lugan\nDelivery Fee: £${deliveryFee.toFixed(2)}`;
+    } else {
+      // Exibir a pergunta sobre o valor da entrega para outras localidades
+      message += `\n\n❓ *What is the delivery fee for my address?*`;
+    }
+
+    // Calcula o total com o valor de entrega se aplicável
+    if (typeof deliveryFee === 'number') {
+      total = (parseFloat(subtotal) + deliveryFee).toFixed(2);
+    }
   }
 
   // Se o serviço for "Pick-up", adiciona o dia e horário de coleta
   if (serviceType === "Pick-up") {
     message += `\n\n📅 *Pick-up Day:* ${pickupDay}\n🕒 *Pick-up Time:* ${pickupTime}`;
   }
+
+  // Resumo de valores (Subtotal, Delivery, Total)
+  message += `\n\n🧾 *Summary*\n\nSubtotal: £${subtotal}`;
+
+  if (typeof deliveryFee === 'number') {
+    message += `\nDelivery: £${deliveryFee.toFixed(2)}`;
+  } else {
+    message += `\nDelivery: £ 0.00`;
+  }
+
+  message += `\nTotal: £${total}`;
 
   // Adiciona os dados da conta bancária se o método de pagamento for "Bank Transfer"
   if (paymentMethod === "Bank Transfer") {
@@ -240,6 +273,7 @@ document.getElementById("submit-order").addEventListener("click", function () {
   // Abrir o WhatsApp com a mensagem formatada
   window.open(whatsappUrl, "_blank");
 });
+
 
 
 // Dados dos itens com suas descrições, ajustando os caminhos das imagens
@@ -389,19 +423,18 @@ function updateButtonAndCartState() {
     statusModal.style.display = "none";
   });
 }
-
 document.getElementById('service-type').addEventListener('change', function () {
   const deliveryDay = document.getElementById('delivery-day');
   const deliveryTime = document.getElementById('delivery-time');
-  const deliveryObservation = document.getElementById('delivery-observation');
+  const deliveryLocation = document.getElementById('delivery-location'); // Select de localização de entrega
   const pickupDay = document.getElementById('pickup-day');
   const pickupTime = document.getElementById('pickup-time');
 
   if (this.value === 'Delivery') {
-    // Mostrar selects para o dia e horário de entrega
+    // Mostrar selects para o dia, horário e cidade de entrega
     deliveryDay.style.display = 'block';
     deliveryTime.style.display = 'block';
-    deliveryObservation.style.display = 'block'; // Exibir observação de locais de entrega
+    deliveryLocation.style.display = 'block'; // Exibir select de localização de entrega
     pickupDay.style.display = 'none';
     pickupTime.style.display = 'none';
 
@@ -412,17 +445,17 @@ document.getElementById('service-type').addEventListener('change', function () {
     // Mostrar selects para o dia e horário de coleta
     deliveryDay.style.display = 'none';
     deliveryTime.style.display = 'none';
-    deliveryObservation.style.display = 'none'; // Ocultar observação de locais de entrega
+    deliveryLocation.style.display = 'none'; // Ocultar select de localização de entrega
     pickupDay.style.display = 'block';
     pickupTime.style.display = 'block';
 
     // Preencher horários de coleta
     populateTimeSelect('pickup-time-select');
   } else {
-    // Ocultar todos os selects e observação de entrega
+    // Ocultar todos os selects
     deliveryDay.style.display = 'none';
     deliveryTime.style.display = 'none';
-    deliveryObservation.style.display = 'none';
+    deliveryLocation.style.display = 'none';
     pickupDay.style.display = 'none';
     pickupTime.style.display = 'none';
   }
@@ -455,4 +488,3 @@ function populateTimeSelect(selectId) {
   finalOption.textContent = '10:00 PM';
   timeSelect.appendChild(finalOption);
 }
-

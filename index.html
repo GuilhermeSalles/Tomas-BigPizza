@@ -493,12 +493,16 @@
                <option value="Pick-up">Pick-up</option>
                <option value="Delivery">Delivery</option>
             </select>
-
-            <!-- Observação para locais de entrega -->
-            <div id="delivery-observation" style="display: none;">
-               <p style="font-weight: 800;">Portadown - £5</p>
-               <p style="font-weight: 800;">Lugan - £5</p>
-               <p style="font-weight: 800;">More locations, combine</p>
+            
+            <!-- Select para escolher a cidade de entrega -->
+            <div id="delivery-location" style="display: none;">
+               <label for="delivery-location-select">Select your city:</label>
+               <select id="delivery-location-select">
+                  <option value="">Select your city</option>
+                  <option value="Portadown">Portadown - £5</option>
+                  <option value="Lugan">Lugan - £5</option>
+                  <option value="Other">Other locations</option>
+               </select>
             </div>
 
             <!-- Select para dias de entrega -->
