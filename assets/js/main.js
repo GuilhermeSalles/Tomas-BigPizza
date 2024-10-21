@@ -40,7 +40,7 @@ window.addEventListener("scroll", shadowHeader);
 /*=============== SHOW SCROLL UP ===============*/
 // const scrollUp = () => {
 //   const scrollUp = document.getElementById("scroll-up");
-  // When the scroll is higher than 350 viewport height, add the show-scroll class to the a tag with the scrollup class
+// When the scroll is higher than 350 viewport height, add the show-scroll class to the a tag with the scrollup class
 //   this.scrollY >= 350
 //     ? scrollUp.classList.add("show-scroll")
 //     : scrollUp.classList.remove("show-scroll");
@@ -182,7 +182,6 @@ document.querySelectorAll(".popular__button").forEach((button) => {
   });
 });
 
-// Enivo pedido
 // Função para enviar o pedido para o WhatsApp
 document.getElementById("submit-order").addEventListener("click", function () {
   const name = document.getElementById("customer-name").value;
@@ -190,6 +189,10 @@ document.getElementById("submit-order").addEventListener("click", function () {
   const serviceType = document.getElementById("service-type").value;
   const paymentMethod = document.getElementById("payment-method").value;
   const observation = document.getElementById("customer-observation").value;
+  const deliveryDay = document.getElementById("delivery-day-select").value;
+  const deliveryTime = document.getElementById("delivery-time-select").value;
+  const pickupDay = document.getElementById("pickup-day-select").value;
+  const pickupTime = document.getElementById("pickup-time-select").value;
 
   if (!name || !address || cart.length === 0) {
     alert(
@@ -209,8 +212,18 @@ document.getElementById("submit-order").addEventListener("click", function () {
     .map((item) => `${item.name}: £${item.price} x ${item.quantity}`)
     .join("\n");
 
-  // Mensagem formatada
+  // Mensagem inicial
   let message = `🗓️ ${currentDate}\n\n🚚 *Service type:* ${serviceType}\n-------------------------------------------\nHello, my name is ${name}, I'd like to place an order.\n📍 *Address:* ${address}\n\n📝 *Products:*\n${cartItemsText}\n\n📝 *Observation:* ${observation}\n\n🧾 *Summary*\n\nSubtotal: £${cartTotal.textContent}\nDelivery: £ 0.00\nTotal: £${cartTotal.textContent}\n\n💲 *Payments:* ${paymentMethod}`;
+
+  // Se o serviço for "Delivery", adiciona o dia e horário de entrega
+  if (serviceType === "Delivery") {
+    message += `\n\n📅 *Delivery Day:* ${deliveryDay}\n🕒 *Delivery Time:* ${deliveryTime}\n\n❓ *What is the delivery fee for my address?*`;
+  }
+
+  // Se o serviço for "Pick-up", adiciona o dia e horário de coleta
+  if (serviceType === "Pick-up") {
+    message += `\n\n📅 *Pick-up Day:* ${pickupDay}\n🕒 *Pick-up Time:* ${pickupTime}`;
+  }
 
   // Adiciona os dados da conta bancária se o método de pagamento for "Bank Transfer"
   if (paymentMethod === "Bank Transfer") {
@@ -227,6 +240,8 @@ document.getElementById("submit-order").addEventListener("click", function () {
   // Abrir o WhatsApp com a mensagem formatada
   window.open(whatsappUrl, "_blank");
 });
+
+
 // Dados dos itens com suas descrições, ajustando os caminhos das imagens
 const itemInfo = {
   "Marguerita": {
@@ -327,53 +342,117 @@ const closingTime = 24; // 10:00 PM
 
 // Verificar horário atual da Irlanda do Norte
 function isWithinOperatingHours() {
-    const now = new Date();
-    const utcOffset = now.getTimezoneOffset(); // Diferença do UTC em minutos
-    const currentTime = new Date(now.getTime() + utcOffset * 60 * 1000); // Convertendo para UTC
-    
-    // Converter o fuso horário da Irlanda do Norte (atualmente segue o BST no horário de verão ou GMT no inverno)
-    const irelandTime = new Date(currentTime.getTime() + (60 * 60 * 1000)); // Adiciona 1 hora ao UTC
+  const now = new Date();
+  const utcOffset = now.getTimezoneOffset(); // Diferença do UTC em minutos
+  const currentTime = new Date(now.getTime() + utcOffset * 60 * 1000); // Convertendo para UTC
 
-    const currentHour = irelandTime.getHours();
-    
-    // Verificar se está entre o horário de abertura e fechamento
-    return currentHour >= openingTime && currentHour < closingTime;
+  // Converter o fuso horário da Irlanda do Norte (atualmente segue o BST no horário de verão ou GMT no inverno)
+  const irelandTime = new Date(currentTime.getTime() + (60 * 60 * 1000)); // Adiciona 1 hora ao UTC
+
+  const currentHour = irelandTime.getHours();
+
+  // Verificar se está entre o horário de abertura e fechamento
+  return currentHour >= openingTime && currentHour < closingTime;
 }
 
 // Função para habilitar/desabilitar botões e sacola
 function updateButtonAndCartState() {
-    const cartIcon = document.getElementById('cart-icon');
-    const buttons = document.querySelectorAll('.popular__button');
-    const statusModal = document.getElementById('status-modal');
-    const closeModal = document.getElementById('close-status-modal');
+  const cartIcon = document.getElementById('cart-icon');
+  const buttons = document.querySelectorAll('.popular__button');
+  const statusModal = document.getElementById('status-modal');
+  const closeModal = document.getElementById('close-status-modal');
 
-    if (isWithinOperatingHours()) {
-        // Habilitar sacola e botões
-        cartIcon.classList.remove('disabled');
-        buttons.forEach(button => {
-            button.disabled = false;
-            button.classList.remove('disabled');
-        });
-
-        // Esconder modal de status
-        statusModal.style.display = "none";
-    } else {
-        // Desabilitar sacola e botões
-        cartIcon.classList.add('disabled');
-        buttons.forEach(button => {
-            button.disabled = true;
-            button.classList.add('disabled');
-        });
-
-        // Mostrar modal com horário de funcionamento
-        statusModal.style.display = "block";
-    }
-
-    // Fecha o modal ao clicar no botão de fechar
-    closeModal.addEventListener("click", () => {
-        statusModal.style.display = "none";
+  if (isWithinOperatingHours()) {
+    // Habilitar sacola e botões
+    cartIcon.classList.remove('disabled');
+    buttons.forEach(button => {
+      button.disabled = false;
+      button.classList.remove('disabled');
     });
+
+    // Esconder modal de status
+    statusModal.style.display = "none";
+  } else {
+    // Desabilitar sacola e botões
+    cartIcon.classList.add('disabled');
+    buttons.forEach(button => {
+      button.disabled = true;
+      button.classList.add('disabled');
+    });
+
+    // Mostrar modal com horário de funcionamento
+    statusModal.style.display = "block";
+  }
+
+  // Fecha o modal ao clicar no botão de fechar
+  closeModal.addEventListener("click", () => {
+    statusModal.style.display = "none";
+  });
 }
 
-// Verificar o estado no carregamento da página
-window.onload = updateButtonAndCartState;
+document.getElementById('service-type').addEventListener('change', function () {
+  const deliveryDay = document.getElementById('delivery-day');
+  const deliveryTime = document.getElementById('delivery-time');
+  const deliveryObservation = document.getElementById('delivery-observation');
+  const pickupDay = document.getElementById('pickup-day');
+  const pickupTime = document.getElementById('pickup-time');
+
+  if (this.value === 'Delivery') {
+    // Mostrar selects para o dia e horário de entrega
+    deliveryDay.style.display = 'block';
+    deliveryTime.style.display = 'block';
+    deliveryObservation.style.display = 'block'; // Exibir observação de locais de entrega
+    pickupDay.style.display = 'none';
+    pickupTime.style.display = 'none';
+
+    // Preencher horários de entrega
+    populateTimeSelect('delivery-time-select');
+
+  } else if (this.value === 'Pick-up') {
+    // Mostrar selects para o dia e horário de coleta
+    deliveryDay.style.display = 'none';
+    deliveryTime.style.display = 'none';
+    deliveryObservation.style.display = 'none'; // Ocultar observação de locais de entrega
+    pickupDay.style.display = 'block';
+    pickupTime.style.display = 'block';
+
+    // Preencher horários de coleta
+    populateTimeSelect('pickup-time-select');
+  } else {
+    // Ocultar todos os selects e observação de entrega
+    deliveryDay.style.display = 'none';
+    deliveryTime.style.display = 'none';
+    deliveryObservation.style.display = 'none';
+    pickupDay.style.display = 'none';
+    pickupTime.style.display = 'none';
+  }
+});
+
+// Função para preencher horários no select
+function populateTimeSelect(selectId) {
+  const timeSelect = document.getElementById(selectId);
+  timeSelect.innerHTML = ''; // Limpar horários anteriores
+
+  const startTime = 18; // 6 PM em 24 horas
+  const endTime = 22; // 10 PM em 24 horas
+  const interval = 20; // Intervalo de 20 minutos
+
+  for (let hour = startTime; hour < endTime; hour++) {
+    for (let minutes = 0; minutes < 60; minutes += interval) {
+      const formattedHour = hour > 12 ? hour - 12 : hour; // Converte para formato de 12 horas
+      const period = hour >= 12 ? 'PM' : 'AM'; // Define se é AM ou PM
+      const timeOption = `${formattedHour}:${minutes < 10 ? '0' + minutes : minutes} ${period}`;
+      const option = document.createElement('option');
+      option.value = timeOption;
+      option.textContent = timeOption;
+      timeSelect.appendChild(option);
+    }
+  }
+
+  // Adiciona a última opção das 10:00 PM
+  const finalOption = document.createElement('option');
+  finalOption.value = '10:00 PM';
+  finalOption.textContent = '10:00 PM';
+  timeSelect.appendChild(finalOption);
+}
+
