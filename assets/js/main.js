@@ -260,7 +260,10 @@ document.getElementById("submit-order").addEventListener("click", function () {
 
   // Adiciona os dados da conta bancária se o método de pagamento for "Bank Transfer"
   if (paymentMethod === "Bank Transfer") {
-    message += `\n\n🏦 *Here are my Nationwide account details:*\n\n*Name:* MR Tomas Recchia\n*Sort code:* 07-04-36\n*Account number:* 26000636`;
+    message += `\n\n🏦 Payment Method:\n\n*Here are my Nationwide account details:*\n\n*Name:* MR Tomas Recchia\n*Sort code:* 07-04-36\n*Account number:* 26000636`;
+  }
+  if (paymentMethod === "Cash") {
+    message += `\n\n🏦 *Payment Method: Cash`;
   }
 
   // Substituir espaços por %20 para conformidade com a URL
