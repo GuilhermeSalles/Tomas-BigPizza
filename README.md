@@ -14,7 +14,6 @@ Este projeto é o site oficial da **Tomas Big Pizza**, desenvolvido para oferece
 - 🌐 **HTML5**: Estrutura de páginas.
 - 🎨 **CSS3**: Estilização e design responsivo.
 - 🖥️ **JavaScript**: Funcionalidades interativas.
-- 🗃️ **[Outras tecnologias utilizadas, como banco de dados]**.
 
 ## ⚙️ Instalação
 Para executar localmente este projeto:
@@ -26,12 +25,6 @@ Para executar localmente este projeto:
    Certifique-se de ter as dependências necessárias instaladas (HTML, CSS, JavaScript).
 3. **Execução**:
    Abra o arquivo `index.html` no seu navegador para visualizar o site.
-
-## 🤝 Contribuições
-Sugestões e contribuições são sempre bem-vindas. Para colaborar, faça um **pull request** ou abra uma **issue** no GitHub.
-
-## 📄 Licença
-Este projeto é distribuído sob uma licença de código aberto.
 
 ---
 
