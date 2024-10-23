@@ -329,7 +329,7 @@ const itemInfo = {
   "Banana & Nutella": {
     img: "assets/img/Banana-Nutella.png",
     description:
-      "A rich dessert pizza made with mozzarella cheese, homemade fresh cheese, Nutella spread, and banana slices, offering a delightful mix of fruit and chocolate.",
+      "A rich dessert pizza made with mozzarella cheese, homemade fresh cheese,powder milk ,Nutella spread, and banana slices, offering a delightful mix of fruit and chocolate.",
   },
 };
 
