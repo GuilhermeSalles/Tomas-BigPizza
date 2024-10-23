@@ -304,12 +304,12 @@ const itemInfo = {
   "Chicken Hawai BBQ": {
     img: "assets/img/Chicken-Hawai-BBQ.png",
     description:
-      "A tropical BBQ pizza with mozzarella cheese, oregano, shredded chicken, bacon, pineapple, and black olives on a BBQ sauce base.",
+      "A tropical BBQ pizza with mozzarella cheese, oregano, shredded chicken, sweet corn, bacon, pineapple, and black olives on a BBQ sauce base.",
   },
   "Chicken special": {
     img: "assets/img/Chicken_special.png",
     description:
-      "A hearty pizza with tomato sauce, mozzarella cheese, oregano, shredded chicken, bacon, and black olives.",
+      "A hearty pizza with tomato sauce, mozzarella cheese, oregano, sweet corn, shredded chicken, bacon, and black olives.",
   },
   "Strogonoff special": {
     img: "assets/img/Strogonoff-special.png",
