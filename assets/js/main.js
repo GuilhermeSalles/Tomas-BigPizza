@@ -214,9 +214,9 @@ document.getElementById("submit-order").addEventListener("click", function () {
     hour12: false, // Formato 24 horas
     timeZone: 'Europe/London'
   };
-  
+
   const currentDate = new Intl.DateTimeFormat('en-GB', options).format(now).replace(',', ' -');
-  
+
 
   // Calculando o subtotal do carrinho
   const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
@@ -382,10 +382,9 @@ document.querySelectorAll(".info__button").forEach((button) => {
 document.getElementById("close-info-modal").addEventListener("click", () => {
   document.getElementById("info-modal").style.display = "none";
 });
-
-// Definir horários de abertura e fechamento
-const openingTime = 15; // 9:00 AM
-const closingTime = 15; // 10:00 PM
+// Definir horários de abertura e fechamento para um intervalo que nunca ocorre
+const openingTime = 15; // 3:00 PM
+const closingTime = 15; // Também 3:00 PM, fazendo com que o site nunca esteja aberto
 
 // Verificar horário atual da Irlanda do Norte
 function isWithinOperatingHours() {
@@ -393,13 +392,13 @@ function isWithinOperatingHours() {
   const utcOffset = now.getTimezoneOffset(); // Diferença do UTC em minutos
   const currentTime = new Date(now.getTime() + utcOffset * 60 * 1000); // Convertendo para UTC
 
-  // Converter o fuso horário da Irlanda do Norte (atualmente segue o BST no horário de verão ou GMT no inverno)
+  // Converter o fuso horário da Irlanda do Norte (BST ou GMT)
   const irelandTime = new Date(currentTime.getTime() + (60 * 60 * 1000)); // Adiciona 1 hora ao UTC
 
   const currentHour = irelandTime.getHours();
 
   // Verificar se está entre o horário de abertura e fechamento
-  // return currentHour >= openingTime && currentHour < closingTime;
+  return currentHour >= openingTime && currentHour < closingTime;
 }
 
 // Função para habilitar/desabilitar botões e sacola
@@ -436,6 +435,10 @@ function updateButtonAndCartState() {
     statusModal.style.display = "none";
   });
 }
+
+// Verificar o estado no carregamento da página
+window.onload = updateButtonAndCartState;
+
 
 
 document.getElementById('service-type').addEventListener('change', function () {
