@@ -384,8 +384,8 @@ document.getElementById("close-info-modal").addEventListener("click", () => {
 });
 
 // Definir horários de abertura e fechamento
-const openingTime = 24; // 9:00 AM
-const closingTime = 24; // 10:00 PM
+const openingTime = 15; // 9:00 AM
+const closingTime = 15; // 10:00 PM
 
 // Verificar horário atual da Irlanda do Norte
 function isWithinOperatingHours() {
@@ -399,7 +399,7 @@ function isWithinOperatingHours() {
   const currentHour = irelandTime.getHours();
 
   // Verificar se está entre o horário de abertura e fechamento
-  return currentHour >= openingTime && currentHour < closingTime;
+  // return currentHour >= openingTime && currentHour < closingTime;
 }
 
 // Função para habilitar/desabilitar botões e sacola
@@ -436,6 +436,8 @@ function updateButtonAndCartState() {
     statusModal.style.display = "none";
   });
 }
+
+
 document.getElementById('service-type').addEventListener('change', function () {
   const deliveryDay = document.getElementById('delivery-day');
   const deliveryTime = document.getElementById('delivery-time');
