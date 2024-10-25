@@ -202,11 +202,21 @@ document.getElementById("submit-order").addEventListener("click", function () {
     return;
   }
 
-  const currentDate = new Date().toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
+  const now = new Date();
+
+  // Formatação de data e hora no fuso horário da Irlanda do Norte (Reino Unido)
+  const options = {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false, // Formato 24 horas
+    timeZone: 'Europe/London'
+  };
+  
+  const currentDate = new Intl.DateTimeFormat('en-GB', options).format(now);
+  
 
   // Calculando o subtotal do carrinho
   const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
@@ -219,21 +229,21 @@ document.getElementById("submit-order").addEventListener("click", function () {
     .join("\n");
 
   // Mensagem inicial
-  let message = `🗓️ ${currentDate}\n\n🚚 *Service type:* ${serviceType}\n-------------------------------------------\nHello, my name is ${name}, I'd like to place an order.\n📍 *Address:* ${address}\n\n📝 *Products:*\n${cartItemsText}\n\n📝 *Observation:* ${observation}`;
+  let message = ` ${currentDate}\n\n *Service type:* ${serviceType}\n-------------------------------------------\nHello, my name is ${name}, I'd like to place an order.\n *Address:* ${address}\n\n *Products:*\n${cartItemsText}\n\n *Observation:* ${observation}`;
 
   // Se o serviço for "Delivery", adiciona o dia e horário de entrega e calcula o valor de entrega
   if (serviceType === "Delivery") {
-    message += `\n\n📅 *Delivery Day:* ${deliveryDay}\n🕒 *Delivery Time:* ${deliveryTime}`;
+    message += `\n\n *Delivery Day:* ${deliveryDay}\n *Delivery Time:* ${deliveryTime}`;
 
     if (deliveryLocation === 'Portadown') {
       deliveryFee = 5.00;
-      message += `\n\n🚚 *Delivery Location:* Portadown\nDelivery Fee: £${deliveryFee.toFixed(2)}`;
+      message += `\n\n *Delivery Location:* Portadown\nDelivery Fee: £${deliveryFee.toFixed(2)}`;
     } else if (deliveryLocation === 'Lugan') {
       deliveryFee = 5.00;
-      message += `\n\n🚚 *Delivery Location:* Lugan\nDelivery Fee: £${deliveryFee.toFixed(2)}`;
+      message += `\n\n *Delivery Location:* Lugan\nDelivery Fee: £${deliveryFee.toFixed(2)}`;
     } else {
       // Exibir a pergunta sobre o valor da entrega para outras localidades
-      message += `\n\n❓ *What is the delivery fee for my address?*`;
+      message += `\n\n *What is the delivery fee for my address?*`;
     }
 
     // Calcula o total com o valor de entrega se aplicável
@@ -244,11 +254,11 @@ document.getElementById("submit-order").addEventListener("click", function () {
 
   // Se o serviço for "Pick-up", adiciona o dia e horário de coleta
   if (serviceType === "Pick-up") {
-    message += `\n\n📅 *Pick-up Day:* ${pickupDay}\n🕒 *Pick-up Time:* ${pickupTime}`;
+    message += `\n\n *Pick-up Day:* ${pickupDay}\n *Pick-up Time:* ${pickupTime}`;
   }
 
   // Resumo de valores (Subtotal, Delivery, Total)
-  message += `\n\n🧾 *Summary*\n\nSubtotal: £${subtotal}`;
+  message += `\n\n *Summary*\n\nSubtotal: £${subtotal}`;
 
   if (typeof deliveryFee === 'number') {
     message += `\nDelivery: £${deliveryFee.toFixed(2)}`;
@@ -260,10 +270,10 @@ document.getElementById("submit-order").addEventListener("click", function () {
 
   // Adiciona os dados da conta bancária se o método de pagamento for "Bank Transfer"
   if (paymentMethod === "Bank Transfer") {
-    message += `\n\n🏦 Payment Method:\n\n*Here are my Nationwide account details:*\n\n*Name:* MR Tomas Recchia\n*Sort code:* 07-04-36\n*Account number:* 26000636`;
+    message += `\n\n Payment Method:\n\n*Here are my Nationwide account details:*\n\n*Name:* MR Tomas Recchia\n*Sort code:* 07-04-36\n*Account number:* 26000636`;
   }
   if (paymentMethod === "Cash") {
-    message += `\n\n🏦 *Payment Method: Cash`;
+    message += `\n\n *Payment Method: Cash`;
   }
 
   // Substituir espaços por %20 para conformidade com a URL

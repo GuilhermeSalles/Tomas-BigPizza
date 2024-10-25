@@ -1376,3 +1376,7 @@ img {
   font-size: 2rem;
   cursor: pointer;
 }
+
+label{
+  font-weight: 600;
+}
