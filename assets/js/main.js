@@ -215,7 +215,7 @@ document.getElementById("submit-order").addEventListener("click", function () {
     timeZone: 'Europe/London'
   };
   
-  const currentDate = new Intl.DateTimeFormat('en-GB', options).format(now);
+  const currentDate = new Intl.DateTimeFormat('en-GB', options).format(now).replace(',', ' -');
   
 
   // Calculando o subtotal do carrinho
