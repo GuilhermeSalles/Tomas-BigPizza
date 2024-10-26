@@ -383,8 +383,8 @@ document.getElementById("close-info-modal").addEventListener("click", () => {
   document.getElementById("info-modal").style.display = "none";
 });
 // Definir horários de abertura e fechamento para um intervalo que nunca ocorre
-const openingTime = 15; // 3:00 PM
-const closingTime = 15; // Também 3:00 PM, fazendo com que o site nunca esteja aberto
+const openingTime = 1; // 3:00 PM
+const closingTime = 24; // Também 3:00 PM, fazendo com que o site nunca esteja aberto
 
 // Verificar horário atual da Irlanda do Norte
 function isWithinOperatingHours() {
