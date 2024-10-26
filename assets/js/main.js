@@ -191,7 +191,9 @@ document.getElementById("submit-order").addEventListener("click", function () {
   const observation = document.getElementById("customer-observation").value;
   const deliveryDay = document.getElementById("delivery-day-select").value;
   const deliveryTime = document.getElementById("delivery-time-select").value;
-  const deliveryLocation = document.getElementById("delivery-location-select").value;
+  const deliveryLocation = document.getElementById(
+    "delivery-location-select"
+  ).value;
   const pickupDay = document.getElementById("pickup-day-select").value;
   const pickupTime = document.getElementById("pickup-time-select").value;
 
@@ -206,20 +208,23 @@ document.getElementById("submit-order").addEventListener("click", function () {
 
   // Formatação de data e hora no fuso horário da Irlanda do Norte (Reino Unido)
   const options = {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
     hour12: false, // Formato 24 horas
-    timeZone: 'Europe/London'
+    timeZone: "Europe/London",
   };
 
-  const currentDate = new Intl.DateTimeFormat('en-GB', options).format(now).replace(',', ' -');
-
+  const currentDate = new Intl.DateTimeFormat("en-GB", options)
+    .format(now)
+    .replace(",", " -");
 
   // Calculando o subtotal do carrinho
-  const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
+  const subtotal = cart
+    .reduce((acc, item) => acc + item.price * item.quantity, 0)
+    .toFixed(2);
   let deliveryFee = 0;
   let total = subtotal;
 
@@ -235,19 +240,28 @@ document.getElementById("submit-order").addEventListener("click", function () {
   if (serviceType === "Delivery") {
     message += `\n\n *Delivery Day:* ${deliveryDay}\n *Delivery Time:* ${deliveryTime}`;
 
-    if (deliveryLocation === 'Portadown') {
-      deliveryFee = 5.00;
-      message += `\n\n *Delivery Location:* Portadown\nDelivery Fee: £${deliveryFee.toFixed(2)}`;
-    } else if (deliveryLocation === 'Lugan') {
-      deliveryFee = 5.00;
-      message += `\n\n *Delivery Location:* Lugan\nDelivery Fee: £${deliveryFee.toFixed(2)}`;
+    if (deliveryLocation === "Portadown") {
+      deliveryFee = 5.0;
+      message += `\n\n *Delivery Location:* Portadown\nDelivery Fee: £${deliveryFee.toFixed(
+        2
+      )}`;
+    } else if (deliveryLocation === "Lugan") {
+      deliveryFee = 5.0;
+      message += `\n\n *Delivery Location:* Lugan\nDelivery Fee: £${deliveryFee.toFixed(
+        2
+      )}`;
+    } else if (deliveryLocation === "Craigavon") {
+      deliveryFee = 5.0;
+      message += `\n\n *Delivery Location:* Craigavon\nDelivery Fee: £${deliveryFee.toFixed(
+        2
+      )}`;
     } else {
       // Exibir a pergunta sobre o valor da entrega para outras localidades
       message += `\n\n *What is the delivery fee for my address?*`;
     }
 
     // Calcula o total com o valor de entrega se aplicável
-    if (typeof deliveryFee === 'number') {
+    if (typeof deliveryFee === "number") {
       total = (parseFloat(subtotal) + deliveryFee).toFixed(2);
     }
   }
@@ -260,7 +274,7 @@ document.getElementById("submit-order").addEventListener("click", function () {
   // Resumo de valores (Subtotal, Delivery, Total)
   message += `\n\n *Summary*\n\nSubtotal: £${subtotal}`;
 
-  if (typeof deliveryFee === 'number') {
+  if (typeof deliveryFee === "number") {
     message += `\nDelivery: £${deliveryFee.toFixed(2)}`;
   } else {
     message += `\nDelivery: £ 0.00`;
@@ -287,16 +301,14 @@ document.getElementById("submit-order").addEventListener("click", function () {
   window.open(whatsappUrl, "_blank");
 });
 
-
-
 // Dados dos itens com suas descrições, ajustando os caminhos das imagens
 const itemInfo = {
-  "Marguerita": {
+  Marguerita: {
     img: "assets/img/Marguerita.png",
     description:
       "A classic pizza made with rich tomato sauce, oregano and mozzarella cheese, offering a simple yet timeless flavour.",
   },
-  "Peperoni": {
+  Peperoni: {
     img: "assets/img/Peperoni.png",
     description:
       "A delicious pizza topped with spicy peperoni slices, oregano, mozzarella cheese, and black olives, all on a tomato base.",
@@ -342,7 +354,6 @@ const itemInfo = {
       "A rich dessert pizza made with mozzarella cheese, homemade fresh cheese,powder milk ,Nutella spread, and banana slices, offering a delightful mix of fruit and chocolate.",
   },
 };
-
 
 // Função para abrir o modal com as informações do item
 function openInfoModal(title) {
@@ -393,7 +404,7 @@ function isWithinOperatingHours() {
   const currentTime = new Date(now.getTime() + utcOffset * 60 * 1000); // Convertendo para UTC
 
   // Converter o fuso horário da Irlanda do Norte (BST ou GMT)
-  const irelandTime = new Date(currentTime.getTime() + (60 * 60 * 1000)); // Adiciona 1 hora ao UTC
+  const irelandTime = new Date(currentTime.getTime() + 60 * 60 * 1000); // Adiciona 1 hora ao UTC
 
   const currentHour = irelandTime.getHours();
 
@@ -403,27 +414,27 @@ function isWithinOperatingHours() {
 
 // Função para habilitar/desabilitar botões e sacola
 function updateButtonAndCartState() {
-  const cartIcon = document.getElementById('cart-icon');
-  const buttons = document.querySelectorAll('.popular__button');
-  const statusModal = document.getElementById('status-modal');
-  const closeModal = document.getElementById('close-status-modal');
+  const cartIcon = document.getElementById("cart-icon");
+  const buttons = document.querySelectorAll(".popular__button");
+  const statusModal = document.getElementById("status-modal");
+  const closeModal = document.getElementById("close-status-modal");
 
   if (isWithinOperatingHours()) {
     // Habilitar sacola e botões
-    cartIcon.classList.remove('disabled');
-    buttons.forEach(button => {
+    cartIcon.classList.remove("disabled");
+    buttons.forEach((button) => {
       button.disabled = false;
-      button.classList.remove('disabled');
+      button.classList.remove("disabled");
     });
 
     // Esconder modal de status
     statusModal.style.display = "none";
   } else {
     // Desabilitar sacola e botões
-    cartIcon.classList.add('disabled');
-    buttons.forEach(button => {
+    cartIcon.classList.add("disabled");
+    buttons.forEach((button) => {
       button.disabled = true;
-      button.classList.add('disabled');
+      button.classList.add("disabled");
     });
 
     // Mostrar modal com horário de funcionamento
@@ -439,50 +450,47 @@ function updateButtonAndCartState() {
 // Verificar o estado no carregamento da página
 window.onload = updateButtonAndCartState;
 
+document.getElementById("service-type").addEventListener("change", function () {
+  const deliveryDay = document.getElementById("delivery-day");
+  const deliveryTime = document.getElementById("delivery-time");
+  const deliveryLocation = document.getElementById("delivery-location"); // Select de localização de entrega
+  const pickupDay = document.getElementById("pickup-day");
+  const pickupTime = document.getElementById("pickup-time");
 
-
-document.getElementById('service-type').addEventListener('change', function () {
-  const deliveryDay = document.getElementById('delivery-day');
-  const deliveryTime = document.getElementById('delivery-time');
-  const deliveryLocation = document.getElementById('delivery-location'); // Select de localização de entrega
-  const pickupDay = document.getElementById('pickup-day');
-  const pickupTime = document.getElementById('pickup-time');
-
-  if (this.value === 'Delivery') {
+  if (this.value === "Delivery") {
     // Mostrar selects para o dia, horário e cidade de entrega
-    deliveryDay.style.display = 'block';
-    deliveryTime.style.display = 'block';
-    deliveryLocation.style.display = 'block'; // Exibir select de localização de entrega
-    pickupDay.style.display = 'none';
-    pickupTime.style.display = 'none';
+    deliveryDay.style.display = "block";
+    deliveryTime.style.display = "block";
+    deliveryLocation.style.display = "block"; // Exibir select de localização de entrega
+    pickupDay.style.display = "none";
+    pickupTime.style.display = "none";
 
     // Preencher horários de entrega
-    populateTimeSelect('delivery-time-select');
-
-  } else if (this.value === 'Pick-up') {
+    populateTimeSelect("delivery-time-select");
+  } else if (this.value === "Pick-up") {
     // Mostrar selects para o dia e horário de coleta
-    deliveryDay.style.display = 'none';
-    deliveryTime.style.display = 'none';
-    deliveryLocation.style.display = 'none'; // Ocultar select de localização de entrega
-    pickupDay.style.display = 'block';
-    pickupTime.style.display = 'block';
+    deliveryDay.style.display = "none";
+    deliveryTime.style.display = "none";
+    deliveryLocation.style.display = "none"; // Ocultar select de localização de entrega
+    pickupDay.style.display = "block";
+    pickupTime.style.display = "block";
 
     // Preencher horários de coleta
-    populateTimeSelect('pickup-time-select');
+    populateTimeSelect("pickup-time-select");
   } else {
     // Ocultar todos os selects
-    deliveryDay.style.display = 'none';
-    deliveryTime.style.display = 'none';
-    deliveryLocation.style.display = 'none';
-    pickupDay.style.display = 'none';
-    pickupTime.style.display = 'none';
+    deliveryDay.style.display = "none";
+    deliveryTime.style.display = "none";
+    deliveryLocation.style.display = "none";
+    pickupDay.style.display = "none";
+    pickupTime.style.display = "none";
   }
 });
 
 // Função para preencher horários no select
 function populateTimeSelect(selectId) {
   const timeSelect = document.getElementById(selectId);
-  timeSelect.innerHTML = ''; // Limpar horários anteriores
+  timeSelect.innerHTML = ""; // Limpar horários anteriores
 
   const startTime = 18; // 6 PM em 24 horas
   const endTime = 22; // 10 PM em 24 horas
@@ -491,9 +499,11 @@ function populateTimeSelect(selectId) {
   for (let hour = startTime; hour < endTime; hour++) {
     for (let minutes = 0; minutes < 60; minutes += interval) {
       const formattedHour = hour > 12 ? hour - 12 : hour; // Converte para formato de 12 horas
-      const period = hour >= 12 ? 'PM' : 'AM'; // Define se é AM ou PM
-      const timeOption = `${formattedHour}:${minutes < 10 ? '0' + minutes : minutes} ${period}`;
-      const option = document.createElement('option');
+      const period = hour >= 12 ? "PM" : "AM"; // Define se é AM ou PM
+      const timeOption = `${formattedHour}:${
+        minutes < 10 ? "0" + minutes : minutes
+      } ${period}`;
+      const option = document.createElement("option");
       option.value = timeOption;
       option.textContent = timeOption;
       timeSelect.appendChild(option);
@@ -501,8 +511,8 @@ function populateTimeSelect(selectId) {
   }
 
   // Adiciona a última opção das 10:00 PM
-  const finalOption = document.createElement('option');
-  finalOption.value = '10:00 PM';
-  finalOption.textContent = '10:00 PM';
+  const finalOption = document.createElement("option");
+  finalOption.value = "10:00 PM";
+  finalOption.textContent = "10:00 PM";
   timeSelect.appendChild(finalOption);
 }
