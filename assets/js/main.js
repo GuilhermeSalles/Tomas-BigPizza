@@ -393,12 +393,19 @@ document.querySelectorAll(".info__button").forEach((button) => {
 document.getElementById("close-info-modal").addEventListener("click", () => {
   document.getElementById("info-modal").style.display = "none";
 });
-// Definir horários de abertura e fechamento para um intervalo que nunca ocorre
-const openingTime = 1; // 3:00 PM
-const closingTime = 24; // Também 3:00 PM, fazendo com que o site nunca esteja aberto
+// Configuração para manter o site sempre aberto ou seguir os horários definidos
+const alwaysOpen = true; // Altere para false se quiser usar os horários definidos
+
+// Definir horários de abertura e fechamento
+const openingTime = 15;
+const closingTime = 15;
 
 // Verificar horário atual da Irlanda do Norte
 function isWithinOperatingHours() {
+  if (alwaysOpen) {
+    return true; // Site sempre aberto
+  }
+
   const now = new Date();
   const utcOffset = now.getTimezoneOffset(); // Diferença do UTC em minutos
   const currentTime = new Date(now.getTime() + utcOffset * 60 * 1000); // Convertendo para UTC
