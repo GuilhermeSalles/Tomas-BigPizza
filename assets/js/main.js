@@ -182,6 +182,8 @@ document.querySelectorAll(".popular__button").forEach((button) => {
   });
 });
 
+
+/*=============== WHATSAPP MENSSAGE ===============*/
 // Função para enviar o pedido para o WhatsApp
 document.getElementById("submit-order").addEventListener("click", function () {
   const name = document.getElementById("customer-name").value;
@@ -301,6 +303,8 @@ document.getElementById("submit-order").addEventListener("click", function () {
   window.open(whatsappUrl, "_blank");
 });
 
+/*=============== INFO ITENS ===============*/
+
 // Dados dos itens com suas descrições, ajustando os caminhos das imagens
 const itemInfo = {
   Marguerita: {
@@ -393,60 +397,52 @@ document.querySelectorAll(".info__button").forEach((button) => {
 document.getElementById("close-info-modal").addEventListener("click", () => {
   document.getElementById("info-modal").style.display = "none";
 });
-// Configuração para manter o site sempre aberto ou seguir os horários definidos
-const alwaysOpen = true; // Altere para false se quiser usar os horários definidos
 
-// Definir horários de abertura e fechamento
-const openingTime = 15;
-const closingTime = 15;
 
-// Verificar horário atual da Irlanda do Norte
+/*=============== OPEN AND CLOSE SITE ===============*/
+// Função modificada para buscar o status da loja do servidor
 function isWithinOperatingHours() {
-  if (alwaysOpen) {
-    return true; // Site sempre aberto
-  }
-
-  const now = new Date();
-  const utcOffset = now.getTimezoneOffset(); // Diferença do UTC em minutos
-  const currentTime = new Date(now.getTime() + utcOffset * 60 * 1000); // Convertendo para UTC
-
-  // Converter o fuso horário da Irlanda do Norte (BST ou GMT)
-  const irelandTime = new Date(currentTime.getTime() + 60 * 60 * 1000); // Adiciona 1 hora ao UTC
-
-  const currentHour = irelandTime.getHours();
-
-  // Verificar se está entre o horário de abertura e fechamento
-  return currentHour >= openingTime && currentHour < closingTime;
+  return fetch('get_status.php')
+    .then(response => response.json())
+    .then(data => data.is_open) // Retorna true se a loja estiver aberta
+    .catch(error => {
+      console.error("Erro ao verificar o status da loja:", error);
+      return false; // Em caso de erro, assume que a loja está fechada
+    });
 }
 
-// Função para habilitar/desabilitar botões e sacola
+
+// Função para habilitar/desabilitar botões e sacola com base no status da loja
 function updateButtonAndCartState() {
   const cartIcon = document.getElementById("cart-icon");
   const buttons = document.querySelectorAll(".popular__button");
   const statusModal = document.getElementById("status-modal");
   const closeModal = document.getElementById("close-status-modal");
 
-  if (isWithinOperatingHours()) {
-    // Habilitar sacola e botões
-    cartIcon.classList.remove("disabled");
-    buttons.forEach((button) => {
-      button.disabled = false;
-      button.classList.remove("disabled");
-    });
+  // Verifica o status da loja
+  isWithinOperatingHours().then(isOpen => {
+    if (isOpen) {
+      // Habilitar sacola e botões
+      cartIcon.classList.remove("disabled");
+      buttons.forEach((button) => {
+        button.disabled = false;
+        button.classList.remove("disabled");
+      });
 
-    // Esconder modal de status
-    statusModal.style.display = "none";
-  } else {
-    // Desabilitar sacola e botões
-    cartIcon.classList.add("disabled");
-    buttons.forEach((button) => {
-      button.disabled = true;
-      button.classList.add("disabled");
-    });
+      // Esconder modal de status
+      statusModal.style.display = "none";
+    } else {
+      // Desabilitar sacola e botões
+      cartIcon.classList.add("disabled");
+      buttons.forEach((button) => {
+        button.disabled = true;
+        button.classList.add("disabled");
+      });
 
-    // Mostrar modal com horário de funcionamento
-    statusModal.style.display = "block";
-  }
+      // Mostrar modal com horário de funcionamento
+      statusModal.style.display = "block";
+    }
+  });
 
   // Fecha o modal ao clicar no botão de fechar
   closeModal.addEventListener("click", () => {
@@ -454,9 +450,11 @@ function updateButtonAndCartState() {
   });
 }
 
+
 // Verificar o estado no carregamento da página
 window.onload = updateButtonAndCartState;
 
+/*=============== MODAL DELIVERY OU PICK-UP ===============*/
 document.getElementById("service-type").addEventListener("change", function () {
   const deliveryDay = document.getElementById("delivery-day");
   const deliveryTime = document.getElementById("delivery-time");
@@ -494,6 +492,8 @@ document.getElementById("service-type").addEventListener("change", function () {
   }
 });
 
+
+/*=============== SELECT TIMES FOR DELIVERY OR PICK-UP ===============*/
 // Função para preencher horários no select
 function populateTimeSelect(selectId) {
   const timeSelect = document.getElementById(selectId);

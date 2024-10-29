@@ -558,7 +558,35 @@
    <script src="assets/js/scrollreveal.min.js"></script>
 
    <!--=============== MAIN JS ===============-->
-   <script src="assets/js/main.js?v=1.0.1"></script>
+   <script src="assets/js/main.js?v=2.0.2"></script>
+
+   <script>
+      // Função para verificar o status da loja e atualizar a página
+      function checkStoreStatus() {
+         fetch('get_status.php')
+            .then(response => response.json())
+            .then(data => {
+               const isOpen = data.is_open; // Recebe o status da loja
+               const cartIcon = document.getElementById("cart-icon");
+               const statusModal = document.getElementById("status-modal");
+
+               if (isOpen) {
+                  // Loja está aberta: exibe o ícone do carrinho e oculta o modal de status
+                  cartIcon.style.display = "block";
+                  statusModal.style.display = "none";
+               } else {
+                  // Loja está fechada: oculta o ícone do carrinho e exibe o modal de status
+                  cartIcon.style.display = "none";
+                  statusModal.style.display = "block";
+               }
+            })
+            .catch(error => console.error("Erro ao verificar o status da loja:", error));
+      }
+
+      // Verifica o status da loja ao carregar a página
+      document.addEventListener("DOMContentLoaded", checkStoreStatus);
+   </script>
+
 </body>
 
 </html>

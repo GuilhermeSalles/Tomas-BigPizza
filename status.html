@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta Tags Básicos -->
+    <title>Best Pizza in Craigavon - 53 Moyraverty Meadows</title>
+    <meta name="description"
+        content="Enjoy the best pizzas in Craigavon, Northern Ireland. Located at 53 Moyraverty Meadows, we offer delicious pizzas including Peperoni, Marguerita, Chicken BBQ, and more. Visit us or order online now!">
+    <meta name="keywords"
+        content="pizza in Craigavon, best pizza in Northern Ireland, Peperoni pizza, Marguerita pizza, Chicken BBQ pizza, 53 Moyraverty Meadows, pizza delivery, pizza restaurant">
+    <meta name="robots" content="index, follow">
+
+    <!-- Meta Tags para Redes Sociais (Open Graph - Facebook) -->
+    <meta property="og:title" content="Best Pizza in Craigavon - 53 Moyraverty Meadows">
+    <meta property="og:description"
+        content="Looking for the best pizza in Craigavon? Visit us at 53 Moyraverty Meadows for a variety of delicious pizzas. Perfect for dine-in or delivery.">
+    <meta property="og:image" content="https://bigpizza.uk/assets/img/pizza-banner.png">
+    <!-- Substitua com a URL correta da imagem -->
+    <meta property="og:url" content="https://bigpizza.uk"> <!-- Substitua com a URL do seu site -->
+    <meta property="og:type" content="restaurant">
+    <meta property="og:site_name" content="Your Pizza Restaurant">
+    <meta property="og:locale" content="en_GB">
+
+    <!-- Meta Tags para Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Best Pizza in Craigavon - 53 Moyraverty Meadows">
+    <meta name="twitter:description"
+        content="Come and taste the best pizzas in Craigavon, Northern Ireland. From Peperoni to Marguerita, we have something for everyone. Visit us today or order online!">
+    <meta name="twitter:image" content="https://bigpizza.uk/assets/img/pizza-banner.png">
+    <!-- Substitua com a URL correta da imagem -->
+    <meta name="twitter:site" content="@yourtwitterhandle"> <!-- Substitua com o seu nome de usuário no Twitter -->
+
+    <!-- Meta Tags para Google Maps (localização) -->
+    <meta name="geo.placename" content="53 Moyraverty Meadows, Craigavon, BT65 5GY, Northern Ireland">
+    <meta name="geo.region" content="GB">
+    <meta name="geo.position" content="54.4510;-6.3887">
+    <meta name="ICBM" content="54.4510, -6.3887">
+
+    <!--=============== FAVICON ===============-->
+    <link rel="shortcut icon" href="assets/img/icon.png" type="image/x-icon">
+
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <style>
+        /* Estilos gerais */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 60px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Container do switch */
+        .switch-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Estilos do switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ff4d4d;
+            /* Cor vermelha para "Desligado" */
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #4CAF50;
+            /* Cor verde para "Aberto" */
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Estilos do label de status */
+        #status-label {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Store Status</h1>
+
+    <!-- Switch para status de abertura -->
+    <div class="switch-container">
+        <label class="switch">
+            <input type="checkbox" id="status-switch">
+            <span class="slider"></span>
+        </label>
+        <span id="status-label">Closed</span> <!-- Label para mostrar "Aberto" ou "Fechado" -->
+    </div>
+
+    <!--=============== SCROLLREVEAL ===============-->
+    <script src="assets/js/scrollreveal.min.js"></script>
+
+    <!--=============== MAIN JS ===============-->
+    <script src="assets/js/main.js?v=2.0.2"></script>
+
+    <!-- Script para mudar o texto do status -->
+    <script>
+        const statusSwitch = document.getElementById("status-switch");
+        const statusLabel = document.getElementById("status-label");
+
+        // Função para obter o status atual da loja
+        function fetchStoreStatus() {
+            fetch('get_status.php')
+                .then(response => response.json())
+                .then(data => {
+                    const isOpen = data.is_open;
+                    statusSwitch.checked = isOpen;
+                    statusLabel.textContent = isOpen ? "Open" : "Closed";
+                })
+                .catch(error => console.error("Erro ao buscar status:", error));
+        }
+
+        // Função para atualizar o status da loja no banco de dados
+        function updateStoreStatus(isOpen) {
+            fetch('update_status.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `is_open=${isOpen ? 1 : 0}`
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success) {
+                        console.error("Erro ao atualizar status:", data.error);
+                    }
+                })
+                .catch(error => console.error("Erro ao atualizar status:", error));
+        }
+
+        // Carregar o estado inicial do switch com base no banco de dados
+        fetchStoreStatus();
+
+        // Atualizar o banco de dados e o rótulo quando o switch for alterado
+        statusSwitch.addEventListener("change", () => {
+            const isOpen = statusSwitch.checked;
+            statusLabel.textContent = isOpen ? "Open" : "Closed";
+            updateStoreStatus(isOpen);
+        });
+    </script>
+
+
+
+</body>
+
+</html>
