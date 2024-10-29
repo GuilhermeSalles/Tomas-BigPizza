@@ -460,7 +460,7 @@ window.onload = updateButtonAndCartState;
 document.getElementById("service-type").addEventListener("change", function () {
   const deliveryDay = document.getElementById("delivery-day");
   const deliveryTime = document.getElementById("delivery-time");
-  const deliveryLocation = document.getElementById("delivery-location"); // Select de localização de entrega
+  const deliveryLocation = document.getElementById("delivery-location");
   const pickupDay = document.getElementById("pickup-day");
   const pickupTime = document.getElementById("pickup-time");
 
@@ -468,7 +468,7 @@ document.getElementById("service-type").addEventListener("change", function () {
     // Mostrar selects para o dia, horário e cidade de entrega
     deliveryDay.style.display = "block";
     deliveryTime.style.display = "block";
-    deliveryLocation.style.display = "block"; // Exibir select de localização de entrega
+    deliveryLocation.style.display = "block";
     pickupDay.style.display = "none";
     pickupTime.style.display = "none";
 
@@ -478,7 +478,7 @@ document.getElementById("service-type").addEventListener("change", function () {
     // Mostrar selects para o dia e horário de coleta
     deliveryDay.style.display = "none";
     deliveryTime.style.display = "none";
-    deliveryLocation.style.display = "none"; // Ocultar select de localização de entrega
+    deliveryLocation.style.display = "none";
     pickupDay.style.display = "block";
     pickupTime.style.display = "block";
 
@@ -497,19 +497,21 @@ document.getElementById("service-type").addEventListener("change", function () {
 // Função para preencher horários no select
 function populateTimeSelect(selectId) {
   const timeSelect = document.getElementById(selectId);
-  timeSelect.innerHTML = ""; // Limpar horários anteriores
+  if (!timeSelect) {
+    console.error(`Select element with ID "${selectId}" not found.`);
+    return;
+  }
+  timeSelect.innerHTML = "";
 
-  const startTime = 18; // 6 PM em 24 horas
-  const endTime = 22; // 10 PM em 24 horas
-  const interval = 20; // Intervalo de 20 minutos
+  const startTime = 18; // 6 PM
+  const endTime = 22; // 10 PM
+  const interval = 20;
 
   for (let hour = startTime; hour < endTime; hour++) {
     for (let minutes = 0; minutes < 60; minutes += interval) {
-      const formattedHour = hour > 12 ? hour - 12 : hour; // Converte para formato de 12 horas
-      const period = hour >= 12 ? "PM" : "AM"; // Define se é AM ou PM
-      const timeOption = `${formattedHour}:${
-        minutes < 10 ? "0" + minutes : minutes
-      } ${period}`;
+      const formattedHour = hour > 12 ? hour - 12 : hour;
+      const period = hour >= 12 ? "PM" : "AM";
+      const timeOption = `${formattedHour}:${minutes < 10 ? "0" + minutes : minutes} ${period}`;
       const option = document.createElement("option");
       option.value = timeOption;
       option.textContent = timeOption;
@@ -517,7 +519,6 @@ function populateTimeSelect(selectId) {
     }
   }
 
-  // Adiciona a última opção das 10:00 PM
   const finalOption = document.createElement("option");
   finalOption.value = "10:00 PM";
   finalOption.textContent = "10:00 PM";
