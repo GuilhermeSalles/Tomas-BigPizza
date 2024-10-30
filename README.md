@@ -1,5 +1,5 @@
 
-# 🍕 Tomas Big Pizza
+# 🍕 Big Pizza
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/GuilhermeSalles/Tomas-BigPizza/blob/main/LICENSE) 
 ## 📝 Visão Geral
 Este projeto é o site oficial da **Tomas Big Pizza**, desenvolvido para oferecer uma plataforma online onde os clientes podem visualizar o cardápio, fazer pedidos e conhecer mais sobre a pizzaria. Acesse o site no ar clicando [aqui](https://bigpizza.uk/).
