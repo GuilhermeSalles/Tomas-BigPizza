@@ -438,7 +438,7 @@ img {
   margin-bottom: 0.75rem;
   white-space: normal; /* Permite a quebra de linha normal */
   word-wrap: break-word; /* Força a quebra de palavras se necessário */
-  max-width: 120px; /* Limita a largura do título para forçar a quebra */
+  max-width: 151px; /* Limita a largura do título para forçar a quebra */
   display: block;
 }
 .popular__subtitle {

@@ -78,7 +78,7 @@ const sr = ScrollReveal({
   //reset: true, //Animations repeat
 });
 
-sr.reveal(".home__data, .footer");
+sr.reveal(".home__data, .footer, .popular__subtitle, .section__title");
 sr.reveal(".home__dish", { delay: 500, distance: "100px", origin: "bottom" });
 sr.reveal(".home__burger", { delay: 1200, distance: "100px", duration: 1500 });
 sr.reveal(".home__ingredient", { delay: 1600, interval: 100 });
@@ -255,6 +255,16 @@ document.getElementById("submit-order").addEventListener("click", function () {
     } else if (deliveryLocation === "Craigavon") {
       deliveryFee = 5.0;
       message += `\n\n *Delivery Location:* Craigavon\nDelivery Fee: £${deliveryFee.toFixed(
+        2
+      )}`;
+    } else if (deliveryLocation === "Dungannon") {
+      deliveryFee = 30.0;
+      message += `\n\n *Delivery Location:* Dungannon\nDelivery Fee: £${deliveryFee.toFixed(
+        2
+      )}`;
+    } else if (deliveryLocation === "Belfast") {
+      deliveryFee = 30.0;
+      message += `\n\n *Delivery Location:* Belfast\nDelivery Fee: £${deliveryFee.toFixed(
         2
       )}`;
     } else {

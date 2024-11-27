@@ -52,33 +52,37 @@
 <body>
    <!--==================== HEADER ====================-->
    <header class="header" id="header">
-      <nav class="nav container">
-         <a href="#" class="nav__logo">
+      <nav class="nav container" role="navigation" aria-label="Main Navigation">
+         <!-- Logo -->
+         <a href="#" class="nav__logo" aria-label="Go to homepage">
             <div>
-               <img src="assets/img/logo.png" alt="Logo image">
+               <img src="assets/img/logo.png" alt="Big Pizza logo" loading="lazy">
             </div>
          </a>
-         <div class="nav__menu" id="nav-menu">
-            <ul class="nav__list">
-               <li><a href="#home" class="nav__link active-link">Home</a></li>
+
+         <!-- Menu -->
+         <div class="nav__menu" id="nav-menu" role="menu" aria-hidden="true">
+            <ul class="nav__list" aria-hidden="true" tabindex="-1">
+               <li><a href="#home" class="nav__link active-link" aria-current="page" tabindex="-1">Home</a></li>
                <!-- <li><a href="#recipe" class="nav__link">Recipe</a></li> -->
-               <li><a href="#popular" class="nav__link">Popular</a></li>
-               <li><a href="#delivery" class="nav__link">Delivery</a></li>
-               <li><a href="#contact" class="nav__link">Contact</a></li>
+               <li><a href="#popular" class="nav__link" tabindex="-1">Popular</a></li>
+               <li><a href="#delivery" class="nav__link" tabindex="-1">Delivery</a></li>
+               <li><a href="#contact" class="nav__link" tabindex="-1">Contact</a></li>
             </ul>
 
-            <!-- Close  button -->
-            <div class="nav__close" id="nav-close">
-               <i class="ri-close-large-line"></i>
+            <!-- Close Button -->
+            <div class="nav__close" id="nav-close" role="button" aria-label="Close navigation menu" tabindex="0">
+               <i class="ri-close-large-line" aria-hidden="true"></i>
             </div>
-
          </div>
-         <!-- Toggle button -->
-         <div class="nav__toggle" id="nav-toggle">
-            <i class="ri-apps-2-fill"></i>
+
+         <!-- Toggle Button -->
+         <div class="nav__toggle" id="nav-toggle" role="button" aria-label="Open navigation menu" tabindex="0">
+            <i class="ri-apps-2-fill" aria-hidden="true"></i>
          </div>
       </nav>
    </header>
+
 
    <!--==================== MAIN ====================-->
    <main class="main">
@@ -98,7 +102,6 @@
                   <br>
                   Colection or delivery only. Pre-order from Sunday to Thursday to not miss out! <br><span
                      style="font-weight: bold;">Why pre-order?</span>
-
                   <br>
                   <br>
                   Because our dough is always fresh, matured for a minimun <span style="font-weight: bold;">24
@@ -106,24 +109,26 @@
                      style="font-weight: bold;">good digestion</span> and incomparable aroma and flavor!
                </p>
 
-               <a href="#popular" class="button">Pre-Order</a>
+               <a href="#popular" class="button" aria-label="Pre-order your favorite pizza">Pre-Order</a>
 
-               <img src="assets/img/sticker-pepi.svg" alt="image potato frities" class="home__sticker">
+               <img src="assets/img/sticker-pepi.svg" alt="Decorative sticker of potato fries" class="home__sticker">
             </div>
 
             <div class="home__images">
-               <img src="assets/img/home-pizza.png" alt="image" class="home__burger">
+               <img src="assets/img/home-pizza.png" alt="Delicious pizza on display" class="home__burger">
 
-               <img src="assets/img/home-cheese.png" alt="image" class="home__ingredient home__potato-1">
-               <img src="assets/img/home-loro.png" alt="image" class="home__ingredient home__potato-2">
-               <img src="assets/img/home-tomato.png" alt="image" class="home__ingredient home__tomato-1">
-               <img src="assets/img/home-peperoni.png" alt="image" class="home__ingredient home__tomato-2">
-               <img src="assets/img/home-cheese.png" alt="image" class="home__ingredient home__lettuce-1">
-               <img src="assets/img/home-loro.png" alt="image" class="home__ingredient home__lettuce-2">
+               <img src="assets/img/home-cheese.png" alt="Cheese ingredient" class="home__ingredient home__potato-1">
+               <img src="assets/img/home-loro.png" alt="Ingredient for pizza" class="home__ingredient home__potato-2">
+               <img src="assets/img/home-tomato.png" alt="Tomato ingredient" class="home__ingredient home__tomato-1">
+               <img src="assets/img/home-peperoni.png" alt="Pepperoni ingredient"
+                  class="home__ingredient home__tomato-2">
+               <img src="assets/img/home-cheese.png" alt="Cheese ingredient" class="home__ingredient home__lettuce-1">
+               <img src="assets/img/home-loro.png" alt="Ingredient for pizza" class="home__ingredient home__lettuce-2">
             </div>
 
          </div>
       </section>
+
 
       <!--==================== RECIPE ====================-->
       <!-- <section class="recipe section" id="recipe">
@@ -207,133 +212,133 @@
 
             <article class="popular__card">
                <img src="assets/img/Marguerita.png" alt="image popular burger" class="popular__img">
-               <button class="info__button">
-                  <i class="ri-information-fill"></i>
+               <button class="info__button" aria-label="More information about this item">
+                  <i class="ri-information-fill" aria-hidden="true"></i>
                </button>
 
                <h2 class="popular__title">Marguerita</h2>
                <span class="popular__price">£10</span>
 
-               <button class="popular__button">
-                  <i class="ri-shopping-bag-3-fill"></i>
-               </button>
+               <button class="popular__button" aria-label="Add item to your shopping cart">
+   <i class="ri-shopping-bag-3-fill" aria-hidden="true"></i>
+</button>
             </article>
 
             <article class="popular__card">
                <img src="assets/img/Peperoni.png" alt="image popular burger" class="popular__img">
-               <button class="info__button">
-                  <i class="ri-information-fill"></i>
+               <button class="info__button" aria-label="More information about this item">
+                  <i class="ri-information-fill" aria-hidden="true"></i>
                </button>
                <h2 class="popular__title">Peperoni</h2>
                <span class="popular__price">£11</span>
 
-               <button class="popular__button">
-                  <i class="ri-shopping-bag-3-fill"></i>
-               </button>
+               <button class="popular__button" aria-label="Add item to your shopping cart">
+   <i class="ri-shopping-bag-3-fill" aria-hidden="true"></i>
+</button>
             </article>
 
             <article class="popular__card">
                <img src="assets/img/Pesto.png" alt="image popular burger" class="popular__img">
-               <button class="info__button">
-                  <i class="ri-information-fill"></i>
+               <button class="info__button" aria-label="More information about this item">
+                  <i class="ri-information-fill" aria-hidden="true"></i>
                </button>
                <h2 class="popular__title">Pesto & courgette</h2>
                <span class="popular__price">£12</span>
 
-               <button class="popular__button">
-                  <i class="ri-shopping-bag-3-fill"></i>
-               </button>
+               <button class="popular__button" aria-label="Add item to your shopping cart">
+   <i class="ri-shopping-bag-3-fill" aria-hidden="true"></i>
+</button>
             </article>
 
             <article class="popular__card">
                <img src="assets/img/Calabresa-especial.png" alt="image popular burger" class="popular__img">
-               <button class="info__button">
-                  <i class="ri-information-fill"></i>
+               <button class="info__button" aria-label="More information about this item">
+                  <i class="ri-information-fill" aria-hidden="true"></i>
                </button>
                <h2 class="popular__title">Calabresa especial</h2>
                <span class="popular__price">£12.50</span>
 
-               <button class="popular__button">
-                  <i class="ri-shopping-bag-3-fill"></i>
-               </button>
+               <button class="popular__button" aria-label="Add item to your shopping cart">
+   <i class="ri-shopping-bag-3-fill" aria-hidden="true"></i>
+</button>
             </article>
 
             <article class="popular__card">
                <img src="assets/img/Chicken_special.png" alt="image popular burger" class="popular__img">
-               <button class="info__button">
-                  <i class="ri-information-fill"></i>
+               <button class="info__button" aria-label="More information about this item">
+                  <i class="ri-information-fill" aria-hidden="true"></i>
                </button>
                <h2 class="popular__title">Chicken special</h2>
                <span class="popular__price">£13</span>
 
-               <button class="popular__button">
-                  <i class="ri-shopping-bag-3-fill"></i>
-               </button>
+               <button class="popular__button" aria-label="Add item to your shopping cart">
+   <i class="ri-shopping-bag-3-fill" aria-hidden="true"></i>
+</button>
             </article>
 
             <article class="popular__card">
                <img src="assets/img/Chicken-Hawai-BBQ.png" alt="image popular burger" class="popular__img">
-               <button class="info__button">
-                  <i class="ri-information-fill"></i>
+               <button class="info__button" aria-label="More information about this item">
+                  <i class="ri-information-fill" aria-hidden="true"></i>
                </button>
                <h2 class="popular__title">Chicken Hawai BBQ</h2>
                <span class="popular__price">13.50</span>
 
-               <button class="popular__button">
-                  <i class="ri-shopping-bag-3-fill"></i>
-               </button>
+               <button class="popular__button" aria-label="Add item to your shopping cart">
+   <i class="ri-shopping-bag-3-fill" aria-hidden="true"></i>
+</button>
             </article>
 
             <article class="popular__card">
                <img src="assets/img/Portuguesa-especial.png" alt="image popular burger" class="popular__img">
-               <button class="info__button">
-                  <i class="ri-information-fill"></i>
+               <button class="info__button" aria-label="More information about this item">
+                  <i class="ri-information-fill" aria-hidden="true"></i>
                </button>
                <h2 class="popular__title">Portuguesa especial</h2>
                <span class="popular__price">£14</span>
 
-               <button class="popular__button">
-                  <i class="ri-shopping-bag-3-fill"></i>
-               </button>
+               <button class="popular__button" aria-label="Add item to your shopping cart">
+   <i class="ri-shopping-bag-3-fill" aria-hidden="true"></i>
+</button>
             </article>
 
             <article class="popular__card">
                <img src="assets/img/Strogonoff-special.png" alt="image popular burger" class="popular__img">
-               <button class="info__button">
-                  <i class="ri-information-fill"></i>
+               <button class="info__button" aria-label="More information about this item">
+                  <i class="ri-information-fill" aria-hidden="true"></i>
                </button>
                <h2 class="popular__title">Strogonoff special</h2>
                <span class="popular__price">£14</span>
 
-               <button class="popular__button">
-                  <i class="ri-shopping-bag-3-fill"></i>
-               </button>
+               <button class="popular__button" aria-label="Add item to your shopping cart">
+   <i class="ri-shopping-bag-3-fill" aria-hidden="true"></i>
+</button>
             </article>
 
             <article class="popular__card">
                <img src="assets/img/Romeu-Julieta.png" alt="image popular burger" class="popular__img">
-               <button class="info__button">
-                  <i class="ri-information-fill"></i>
+               <button class="info__button" aria-label="More information about this item">
+                  <i class="ri-information-fill" aria-hidden="true"></i>
                </button>
                <h2 class="popular__title">Romeu & Julieta</h2>
                <span class="popular__price">£13</span>
 
-               <button class="popular__button">
-                  <i class="ri-shopping-bag-3-fill"></i>
-               </button>
+               <button class="popular__button" aria-label="Add item to your shopping cart">
+   <i class="ri-shopping-bag-3-fill" aria-hidden="true"></i>
+</button>
             </article>
 
             <article class="popular__card">
                <img src="assets/img/Banana-Nutella.png" alt="image popular burger" class="popular__img">
-               <button class="info__button">
-                  <i class="ri-information-fill"></i>
+               <button class="info__button" aria-label="More information about this item">
+                  <i class="ri-information-fill" aria-hidden="true"></i>
                </button>
                <h2 class="popular__title">Banana & Nutella</h2>
                <span class="popular__price">£13</span>
 
-               <button class="popular__button">
-                  <i class="ri-shopping-bag-3-fill"></i>
-               </button>
+               <button class="popular__button" aria-label="Add item to your shopping cart">
+   <i class="ri-shopping-bag-3-fill" aria-hidden="true"></i>
+</button>
             </article>
 
          </div>
@@ -384,14 +389,18 @@
                      <h3 class="contact__title">Write Us</h3>
 
                      <div class="contact__social">
-                        <a href="https://api.whatsapp.com/send?phone=447707763804&text=Hello, more information!"
-                           target="_blank">
+                        <a href="https://api.whatsapp.com/send?phone=447707763804&amp;text=Hello, more information!"
+                           target="_blank" rel="noopener noreferrer"
+                           aria-label="Contact us on WhatsApp for more information">
                            <i class="ri-whatsapp-fill"></i>
                         </a>
 
-                        <a href="https://www.instagram.com/ukbigpizza" target="_blank">
-                           <i class="ri-instagram-fill"></i>
+                        <a href="https://www.instagram.com/ukbigpizza" target="_blank" rel="noopener noreferrer"
+                           aria-label="Visit UK Big Pizza on Instagram">
+                           <i class="ri-instagram-fill" aria-hidden="true"></i>
+                           <span class="visually-hidden"></span>
                         </a>
+
 
                      </div>
                   </div>
@@ -435,11 +444,15 @@
             <a href="" class="footer__link" style="visibility: hidden;">Privacy Policy</a>
 
             <div class="footer__social">
-               <a href="https://api.whatsapp.com/send?phone=447707763804&text=Hello, more information!" target="_blank">
+               <a href="https://api.whatsapp.com/send?phone=447707763804&amp;text=Hello, more information!"
+                  target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp for more information">
                   <i class="ri-whatsapp-fill"></i>
                </a>
-               <a href="https://www.instagram.com/ukbigpizza" target="_blank">
-                  <i class="ri-instagram-fill"></i>
+
+               <a href="https://www.instagram.com/ukbigpizza" target="_blank" rel="noopener noreferrer"
+                  aria-label="Visit UK Big Pizza on Instagram">
+                  <i class="ri-instagram-fill" aria-hidden="true"></i>
+                  <span class="visually-hidden"></span>
                </a>
             </div>
          </div>
@@ -498,10 +511,16 @@
             <!-- Select para escolher a cidade de entrega -->
             <div id="delivery-location" style="display: none;">
                <label for="delivery-location-select">Select your city:</label>
+               <p id="status-modal-description" style="padding: 0.3rem;">
+                  The <strong>limit is 25 miles.</strong> However, exceeding this limit will incur an
+                  <strong>additional</strong> charge of <strong>£2 per mile.</strong>
+               </p>
                <select id="delivery-location-select">
                   <option value="Portadown">Portadown - £5</option>
                   <option value="Lugan">Lugan - £5</option>
                   <option value="Craigavon">Craigavon - £5</option>
+                  <option value="Dungannon">Dungannon - £30</option>
+                  <option value="Belfast">Belfast - £30</option>
                   <option value="Other">Other locations</option>
                </select>
             </div>
@@ -558,7 +577,7 @@
    <script src="assets/js/scrollreveal.min.js"></script>
 
    <!--=============== MAIN JS ===============-->
-   <script src="assets/js/main.js?v=2.0.2"></script>
+   <script src="assets/js/main.js?v=2.0.3"></script>
 
    <script>
       // Função para verificar o status da loja e atualizar a página
