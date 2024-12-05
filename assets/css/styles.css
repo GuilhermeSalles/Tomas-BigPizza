@@ -151,7 +151,7 @@ img {
 }
 
 .nav__logo div {
-  background-color: #C6000B;
+  background-color: #c6000b;
   padding: 1px;
   border-radius: 0.5rem;
 }
@@ -1377,6 +1377,208 @@ img {
   cursor: pointer;
 }
 
-label{
+label {
   font-weight: 600;
+}
+
+/** Border and drinks **/
+/* Estilo do Step 2 */
+.cart-form-step-2 {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Botão de Place Order no Step 2 (igual ao Step 1) */
+.cart-form-step-2 .order-button {
+  background-color: var(--first-color);
+  color: var(--white-color);
+  padding: 1rem;
+  border: none;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.cart-form-step-2 .order-button:hover {
+  background-color: var(--first-color-alt);
+}
+
+/* Contêiner de bebidas e cream cheese */
+.addons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Estilo para cada item (bebida ou cream cheese) */
+.addon-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid var(--text-color-light);
+  background-color: var(--container-color);
+  margin-bottom: 1rem;
+}
+
+/* Texto do item */
+.addon-item span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--title-color);
+  flex: 0;
+}
+
+/* Botões + e - no Step 2 */
+.addon-item button {
+  background-color: var(--first-color);
+  color: var(--white-color);
+  border: none;
+  padding: 8px 12px;
+  font-size: 1.4rem;
+  border-radius: 30%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addon-item button:hover {
+  background-color: var(--first-color-alt);
+}
+
+/* Contador de quantidade */
+.addon-item .addon-quantity {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--title-color);
+  margin: 0 10px;
+}
+
+/* Checkbox para cream cheese */
+#cream-cheese-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#cream-cheese-container input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--first-color);
+  cursor: pointer;
+}
+
+/* Textarea para detalhes do cream cheese */
+#cream-cheese-container textarea {
+  display: none;
+  margin-top: 1rem;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid var(--text-color-light);
+  border-radius: 8px;
+  width: 100%;
+  resize: vertical;
+  height: 100px;
+}
+
+/* Ajustes para dispositivos menores */
+@media (max-width: 768px) {
+  .addon-item button {
+    padding: 6px 10px;
+    font-size: 1.2rem;
+  }
+
+  .addon-item .addon-quantity {
+    font-size: 1rem;
+  }
+
+  #cream-cheese-container textarea {
+    height: 80px;
+  }
+}
+
+
+/* Wrapper para alinhamento */
+.cream-cheese-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+/* Estilo para o checkbox customizado */
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--title-color);
+  cursor: pointer;
+}
+
+/* Estilo da caixa de seleção */
+.custom-checkbox input[type="checkbox"] {
+  display: none; /* Esconde o checkbox padrão */
+}
+
+.custom-checkbox .checkmark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--text-color-light);
+  border-radius: 4px;
+  position: relative;
+  background-color: var(--white-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+  background-color: var(--first-color);
+  border-color: var(--first-color);
+}
+
+.custom-checkbox .checkmark::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  width: 4px;
+  height: 8px;
+  border: solid var(--white-color);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  display: none;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
+  display: block;
+}
+
+/* Estilo do botão Place Order */
+.order-button {
+  background-color: var(--first-color);
+  color: var(--white-color);
+  padding: 1rem;
+  border: none;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%; /* Deixa o botão ocupar toda a largura */
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.order-button:hover {
+  background-color: var(--first-color-alt);
+}
+
+/* Botão responsivo */
+@media (max-width: 768px) {
+  .order-button {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
 }

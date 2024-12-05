@@ -181,10 +181,98 @@ document.querySelectorAll(".popular__button").forEach((button) => {
     addToCart({ name, price, image });
   });
 });
+// =================== VARIÁVEIS ===================
+let addOns = {
+  drinks: {
+    Coke: 0,
+    "Coke Zero": 0,
+  },
+  creamCheese: {
+    selected: false,
+    pizzas: "",
+  },
+};
 
+const itemPrices = {
+  Coke: 2.0,
+  "Coke Zero": 2.0,
+  "Cream Cheese": 2.0,
+};
 
-/*=============== WHATSAPP MENSSAGE ===============*/
-// Função para enviar o pedido para o WhatsApp
+// =================== FUNÇÕES ===================
+
+// Atualizar o valor total do carrinho
+function updateCartTotal() {
+  let cartSubtotal = cart.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+
+  let addOnsTotal = 0;
+  for (const drink in addOns.drinks) {
+    addOnsTotal += addOns.drinks[drink] * itemPrices[drink];
+  }
+  if (addOns.creamCheese.selected) {
+    addOnsTotal += itemPrices["Cream Cheese"];
+  }
+
+  const total = (cartSubtotal + addOnsTotal).toFixed(2);
+  document.getElementById("cart-total").textContent = `${total}`;
+}
+
+// Alternar entre os passos do formulário
+function goToStep(step) {
+  document.getElementById("form-step-1").style.display =
+    step === 1 ? "block" : "none";
+  document.getElementById("form-step-2").style.display =
+    step === 2 ? "block" : "none";
+}
+
+// =================== EVENTOS ===================
+
+document.getElementById("next-step").addEventListener("click", function () {
+  goToStep(2);
+});
+
+document
+  .querySelectorAll(".addon-increment, .addon-decrement")
+  .forEach((button) => {
+    button.addEventListener("click", function () {
+      const item = this.dataset.item;
+      if (this.classList.contains("addon-increment")) {
+        addOns.drinks[item]++;
+      } else if (
+        this.classList.contains("addon-decrement") &&
+        addOns.drinks[item] > 0
+      ) {
+        addOns.drinks[item]--;
+      }
+      document.querySelector(
+        `.addon-quantity[data-item="${item}"]`
+      ).textContent = addOns.drinks[item];
+      updateCartTotal();
+    });
+  });
+
+document
+  .getElementById("cream-cheese-check")
+  .addEventListener("change", function () {
+    addOns.creamCheese.selected = this.checked;
+    document.getElementById("cream-cheese-pizzas").style.display = this.checked
+      ? "block"
+      : "none";
+    if (!this.checked) addOns.creamCheese.pizzas = "";
+    updateCartTotal();
+  });
+
+document
+  .getElementById("cream-cheese-pizzas")
+  .addEventListener("input", function () {
+    addOns.creamCheese.pizzas = this.value;
+  });
+
+// =================== ENVIAR PEDIDO ===================
+
 document.getElementById("submit-order").addEventListener("click", function () {
   const name = document.getElementById("customer-name").value;
   const address = document.getElementById("customer-address").value;
@@ -207,38 +295,27 @@ document.getElementById("submit-order").addEventListener("click", function () {
   }
 
   const now = new Date();
-
-  // Formatação de data e hora no fuso horário da Irlanda do Norte (Reino Unido)
   const options = {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
     hour: "2-digit",
     minute: "2-digit",
-    hour12: false, // Formato 24 horas
+    hour12: false,
     timeZone: "Europe/London",
   };
-
   const currentDate = new Intl.DateTimeFormat("en-GB", options)
     .format(now)
     .replace(",", " -");
 
-  // Calculando o subtotal do carrinho
-  const subtotal = cart
-    .reduce((acc, item) => acc + item.price * item.quantity, 0)
-    .toFixed(2);
-  let deliveryFee = 0;
-  let total = subtotal;
-
-  // Formatando os itens do carrinho
-  const cartItemsText = cart
-    .map((item) => `${item.name}: £${item.price} x ${item.quantity}`)
-    .join("\n");
-
   // Mensagem inicial
-  let message = ` ${currentDate}\n\n *Service type:* ${serviceType}\n-------------------------------------------\nHello, my name is ${name}, I'd like to place an order.\n *Address:* ${address}\n\n *Products:*\n${cartItemsText}\n\n *Observation:* ${observation}`;
+  let message = ` ${currentDate}\n\n *Service type:* ${serviceType}\n-------------------------------------------\nHello, my name is ${name}, I'd like to place an order.\n *Address:* ${address}\n\n *Products:*\n${cart
+    .map((item) => `${item.name}: £${item.price} x ${item.quantity}`)
+    .join("\n")}\n\n *Observation:* ${observation}`;
 
-  // Se o serviço for "Delivery", adiciona o dia e horário de entrega e calcula o valor de entrega
+  // Informações de entrega ou coleta
+  let deliveryFee = 0;
+
   if (serviceType === "Delivery") {
     message += `\n\n *Delivery Day:* ${deliveryDay}\n *Delivery Time:* ${deliveryTime}`;
 
@@ -268,49 +345,60 @@ document.getElementById("submit-order").addEventListener("click", function () {
         2
       )}`;
     } else {
-      // Exibir a pergunta sobre o valor da entrega para outras localidades
       message += `\n\n *What is the delivery fee for my address?*`;
     }
-
-    // Calcula o total com o valor de entrega se aplicável
-    if (typeof deliveryFee === "number") {
-      total = (parseFloat(subtotal) + deliveryFee).toFixed(2);
-    }
-  }
-
-  // Se o serviço for "Pick-up", adiciona o dia e horário de coleta
-  if (serviceType === "Pick-up") {
+  } else if (serviceType === "Pick-up") {
     message += `\n\n *Pick-up Day:* ${pickupDay}\n *Pick-up Time:* ${pickupTime}`;
   }
 
-  // Resumo de valores (Subtotal, Delivery, Total)
-  message += `\n\n *Summary*\n\nSubtotal: £${subtotal}`;
+  // Resumo de valores
+  const subtotal = cart.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+  const addOnsTotal = Object.values(addOns.drinks).reduce(
+    (acc, qty, idx) => acc + qty * Object.values(itemPrices)[idx],
+    addOns.creamCheese.selected ? itemPrices["Cream Cheese"] : 0
+  );
+  const total = subtotal + addOnsTotal + deliveryFee;
 
-  if (typeof deliveryFee === "number") {
-    message += `\nDelivery: £${deliveryFee.toFixed(2)}`;
-  } else {
-    message += `\nDelivery: £ 0.00`;
+  message += `\n\n *Summary*\n\nSubtotal: £${subtotal.toFixed(
+    2
+  )}\nDelivery: £${deliveryFee.toFixed(2)}\nTotal: £${total.toFixed(2)}`;
+
+  // Adicionais
+  let addOnsMessage = "\n\n *Add-ons:*\n";
+  let hasAddOns = false;
+
+  for (const drink in addOns.drinks) {
+    if (addOns.drinks[drink] > 0) {
+      addOnsMessage += `${drink}: £${itemPrices[drink]} x ${addOns.drinks[drink]}\n`;
+      hasAddOns = true;
+    }
   }
 
-  message += `\nTotal: £${total}`;
+  if (addOns.creamCheese.selected) {
+    addOnsMessage += `Cream Cheese: £${itemPrices["Cream Cheese"]} x 1\n`;
+    if (addOns.creamCheese.pizzas) {
+      addOnsMessage += `Pizzas with Cream Cheese: ${addOns.creamCheese.pizzas}\n`;
+    }
+    hasAddOns = true;
+  }
 
-  // Adiciona os dados da conta bancária se o método de pagamento for "Bank Transfer"
+  if (!hasAddOns) {
+    addOnsMessage += "None\n";
+  }
+
+  message += addOnsMessage;
+
   if (paymentMethod === "Bank Transfer") {
-    message += `\n\n Payment Method:\n\n*Here are my Nationwide account details:*\n\n*Name:* MR Tomas Recchia\n*Sort code:* 07-04-36\n*Account number:* 26000636`;
-  }
-  if (paymentMethod === "Cash") {
-    message += `\n\n *Payment Method: Cash`;
+    message += `\n\n Payment Method: Bank Transfer\n\n*Here are my Nationwide account details:*\n\n*Name:* MR Tomas Recchia\n*Sort code:* 07-04-36\n*Account number:* 26000636`;
+  } else if (paymentMethod === "Cash") {
+    message += `\n\n *Payment Method: Cash*`;
   }
 
-  // Substituir espaços por %20 para conformidade com a URL
   const whatsappMessage = encodeURIComponent(message);
-
-  // Número do WhatsApp para envio (alterar conforme necessário)
-  const whatsappNumber = "447707763804"; // Número fictício para exemplo
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
-
-  // Abrir o WhatsApp com a mensagem formatada
-  window.open(whatsappUrl, "_blank");
+  window.open(`https://wa.me/447707763804?text=${whatsappMessage}`, "_blank");
 });
 
 /*=============== INFO ITENS ===============*/
@@ -408,19 +496,17 @@ document.getElementById("close-info-modal").addEventListener("click", () => {
   document.getElementById("info-modal").style.display = "none";
 });
 
-
 /*=============== OPEN AND CLOSE SITE ===============*/
 // Função modificada para buscar o status da loja do servidor
 function isWithinOperatingHours() {
-  return fetch('get_status.php')
-    .then(response => response.json())
-    .then(data => data.is_open) // Retorna true se a loja estiver aberta
-    .catch(error => {
+  return fetch("get_status.php")
+    .then((response) => response.json())
+    .then((data) => data.is_open) // Retorna true se a loja estiver aberta
+    .catch((error) => {
       console.error("Erro ao verificar o status da loja:", error);
       return false; // Em caso de erro, assume que a loja está fechada
     });
 }
-
 
 // Função para habilitar/desabilitar botões e sacola com base no status da loja
 function updateButtonAndCartState() {
@@ -430,7 +516,7 @@ function updateButtonAndCartState() {
   const closeModal = document.getElementById("close-status-modal");
 
   // Verifica o status da loja
-  isWithinOperatingHours().then(isOpen => {
+  isWithinOperatingHours().then((isOpen) => {
     if (isOpen) {
       // Habilitar sacola e botões
       cartIcon.classList.remove("disabled");
@@ -459,7 +545,6 @@ function updateButtonAndCartState() {
     statusModal.style.display = "none";
   });
 }
-
 
 // Verificar o estado no carregamento da página
 window.onload = updateButtonAndCartState;
@@ -502,7 +587,6 @@ document.getElementById("service-type").addEventListener("change", function () {
   }
 });
 
-
 /*=============== SELECT TIMES FOR DELIVERY OR PICK-UP ===============*/
 // Função para preencher horários no select
 function populateTimeSelect(selectId) {
@@ -521,7 +605,9 @@ function populateTimeSelect(selectId) {
     for (let minutes = 0; minutes < 60; minutes += interval) {
       const formattedHour = hour > 12 ? hour - 12 : hour;
       const period = hour >= 12 ? "PM" : "AM";
-      const timeOption = `${formattedHour}:${minutes < 10 ? "0" + minutes : minutes} ${period}`;
+      const timeOption = `${formattedHour}:${
+        minutes < 10 ? "0" + minutes : minutes
+      } ${period}`;
       const option = document.createElement("option");
       option.value = timeOption;
       option.textContent = timeOption;
