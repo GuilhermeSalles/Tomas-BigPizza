@@ -194,8 +194,8 @@ let addOns = {
 };
 
 const itemPrices = {
-  Coke: 2.0,
-  "Coke Zero": 2.0,
+  Coke: 1.5,
+  "Coke Zero": 1.5,
   "Cream Cheese": 2.0,
 };
 
@@ -260,7 +260,7 @@ document
     addOns.creamCheese.selected = this.checked;
     document.getElementById("cream-cheese-pizzas").style.display = this.checked
       ? "block"
-      : "none";
+      : "block";
     if (!this.checked) addOns.creamCheese.pizzas = "";
     updateCartTotal();
   });
@@ -270,9 +270,7 @@ document
   .addEventListener("input", function () {
     addOns.creamCheese.pizzas = this.value;
   });
-
 // =================== ENVIAR PEDIDO ===================
-
 document.getElementById("submit-order").addEventListener("click", function () {
   const name = document.getElementById("customer-name").value;
   const address = document.getElementById("customer-address").value;
@@ -356,15 +354,17 @@ document.getElementById("submit-order").addEventListener("click", function () {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  const addOnsTotal = Object.values(addOns.drinks).reduce(
-    (acc, qty, idx) => acc + qty * Object.values(itemPrices)[idx],
+  const addOnsTotal = Object.keys(addOns.drinks).reduce(
+    (acc, drink) => acc + addOns.drinks[drink] * itemPrices[drink],
     addOns.creamCheese.selected ? itemPrices["Cream Cheese"] : 0
   );
   const total = subtotal + addOnsTotal + deliveryFee;
 
   message += `\n\n *Summary*\n\nSubtotal: £${subtotal.toFixed(
     2
-  )}\nDelivery: £${deliveryFee.toFixed(2)}\nTotal: £${total.toFixed(2)}`;
+  )}\nAdd-ons: £${addOnsTotal.toFixed(2)}\nDelivery: £${deliveryFee.toFixed(
+    2
+  )}\nTotal: £${total.toFixed(2)}`;
 
   // Adicionais
   let addOnsMessage = "\n\n *Add-ons:*\n";

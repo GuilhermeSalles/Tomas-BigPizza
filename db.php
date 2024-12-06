@@ -1,8 +1,8 @@
 <?php
 // Credenciais do banco de dados
-$servername = "localhost:8888";
-$username = "root";
-$password = "root";
+$servername = "localhost";
+$username = "u255572643_bigpizza";
+$password = "Bigpizza_123";
 $dbname = "u255572643_loja";
 
 // Criar conexão

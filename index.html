@@ -467,21 +467,23 @@
          </p>
       </div>
    </div>
-
    <!--========== MODAL ==========-->
    <div id="cart-modal" class="cart-modal">
       <div class="cart-modal-content">
          <span id="close-modal" class="close">&times;</span>
          <h2>Your Cart</h2>
-         <div id="cart-items" class="cart-items">
-            <!-- Itens adicionados serão exibidos aqui -->
-         </div>
+
+         <!-- Total compartilhado entre Step 1 e Step 2 -->
          <div class="cart-total">
             <h3>Total: £<span id="cart-total">0</span></h3>
          </div>
 
          <!-- Step 1: Form Fields -->
          <div class="cart-form" id="form-step-1">
+            <div id="cart-items" class="cart-items">
+               <!-- Pizzas e itens principais aparecem aqui -->
+            </div>
+
             <label for="customer-name">Name:</label>
             <input type="text" id="customer-name" placeholder="Your Name" required>
 
@@ -495,8 +497,8 @@
                <option value="Delivery">Delivery</option>
             </select>
 
-             <!-- Select para escolher a cidade de entrega -->
-             <div id="delivery-location" style="display: none;">
+            <!-- Select para escolher a cidade de entrega -->
+            <div id="delivery-location" style="display: none;">
                <label for="delivery-location-select">Select your city:</label>
                <p id="status-modal-description" style="padding: 0.3rem;">
                   The <strong>limit is 25 miles.</strong> However, exceeding this limit will incur an
@@ -560,11 +562,14 @@
 
          <!-- Step 2: Add-ons -->
          <div class="cart-form" id="form-step-2" style="display: none;">
-            <h3>Add Drinks</h3>
+            <h3>Add Drinks and Cream Cheese</h3>
+
+            <!-- Drinks Section -->
             <div id="drinks">
                <div class="addon-item cart-item">
                   <img src="assets/img/coke.png" alt="Coke" class="addon-img">
                   <span>Coke</span>
+                  <span>£1.5</span>
                   <button class="addon-decrement" data-item="Coke">-</button>
                   <span class="addon-quantity" data-item="Coke">0</span>
                   <button class="addon-increment" data-item="Coke">+</button>
@@ -572,6 +577,7 @@
                <div class="addon-item cart-item">
                   <img src="assets/img/coke_zero.png" alt="Coke Zero" class="addon-img">
                   <span>Coke Zero</span>
+                  <span>£1.5</span>
                   <button class="addon-decrement" data-item="Coke Zero">-</button>
                   <span class="addon-quantity" data-item="Coke Zero">0</span>
                   <button class="addon-increment" data-item="Coke Zero">+</button>
@@ -584,12 +590,10 @@
                   <label style="margin-bottom: 1rem;" class="custom-checkbox">
                      <input type="checkbox" id="cream-cheese-check">
                      <span class="checkmark"></span>
-                     Add Cream Cheese (£2)??
+                     Add Cream Cheese (£2)
                   </label>
-                  <textarea style="
-                  margin-bottom: 1rem;
-                  margin-top: 1rem;" id="cream-cheese-pizzas" placeholder="Specify pizzas for cream cheese"
-                     style="display: none;"></textarea>
+                  <textarea id="cream-cheese-pizzas" style="/* display: block; *//* margin-top: 0rem; */ margin-bottom: 1rem;" placeholder="Specify pizzas for cream cheese"
+                     style="display: none; margin-top: 1rem;"></textarea>
                </div>
             </div>
 
@@ -597,6 +601,7 @@
          </div>
       </div>
    </div>
+
 
 
    <!--=============== SCROLLREVEAL ===============-->
