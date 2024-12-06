@@ -187,9 +187,8 @@ let addOns = {
     Coke: 0,
     "Coke Zero": 0,
   },
-  creamCheese: {
-    selected: false,
-    pizzas: "",
+  extras: {
+    "Cream Cheese": 0,
   },
 };
 
@@ -212,12 +211,13 @@ function updateCartTotal() {
   for (const drink in addOns.drinks) {
     addOnsTotal += addOns.drinks[drink] * itemPrices[drink];
   }
-  if (addOns.creamCheese.selected) {
-    addOnsTotal += itemPrices["Cream Cheese"];
+  for (const extra in addOns.extras) {
+    addOnsTotal += addOns.extras[extra] * itemPrices[extra];
   }
 
   const total = (cartSubtotal + addOnsTotal).toFixed(2);
   document.getElementById("cart-total").textContent = `${total}`;
+  return { cartSubtotal, addOnsTotal, total }; // Retorna valores para uso posterior
 }
 
 // Alternar entre os passos do formulário
@@ -230,46 +230,46 @@ function goToStep(step) {
 
 // =================== EVENTOS ===================
 
+// Navegar para o próximo passo
 document.getElementById("next-step").addEventListener("click", function () {
   goToStep(2);
 });
 
+// Incrementar ou decrementar itens adicionais (drinks e cream cheese)
 document
   .querySelectorAll(".addon-increment, .addon-decrement")
   .forEach((button) => {
     button.addEventListener("click", function () {
       const item = this.dataset.item;
+
       if (this.classList.contains("addon-increment")) {
-        addOns.drinks[item]++;
-      } else if (
-        this.classList.contains("addon-decrement") &&
-        addOns.drinks[item] > 0
-      ) {
-        addOns.drinks[item]--;
+        if (addOns.drinks[item] !== undefined) {
+          addOns.drinks[item]++;
+        } else if (addOns.extras[item] !== undefined) {
+          addOns.extras[item]++;
+        }
+      } else if (this.classList.contains("addon-decrement")) {
+        if (addOns.drinks[item] !== undefined && addOns.drinks[item] > 0) {
+          addOns.drinks[item]--;
+        } else if (
+          addOns.extras[item] !== undefined &&
+          addOns.extras[item] > 0
+        ) {
+          addOns.extras[item]--;
+        }
       }
+
       document.querySelector(
         `.addon-quantity[data-item="${item}"]`
-      ).textContent = addOns.drinks[item];
+      ).textContent =
+        addOns.drinks[item] !== undefined
+          ? addOns.drinks[item]
+          : addOns.extras[item];
+
       updateCartTotal();
     });
   });
 
-document
-  .getElementById("cream-cheese-check")
-  .addEventListener("change", function () {
-    addOns.creamCheese.selected = this.checked;
-    document.getElementById("cream-cheese-pizzas").style.display = this.checked
-      ? "block"
-      : "block";
-    if (!this.checked) addOns.creamCheese.pizzas = "";
-    updateCartTotal();
-  });
-
-document
-  .getElementById("cream-cheese-pizzas")
-  .addEventListener("input", function () {
-    addOns.creamCheese.pizzas = this.value;
-  });
 // =================== ENVIAR PEDIDO ===================
 document.getElementById("submit-order").addEventListener("click", function () {
   const name = document.getElementById("customer-name").value;
@@ -306,67 +306,39 @@ document.getElementById("submit-order").addEventListener("click", function () {
     .format(now)
     .replace(",", " -");
 
-  // Mensagem inicial
-  let message = ` ${currentDate}\n\n *Service type:* ${serviceType}\n-------------------------------------------\nHello, my name is ${name}, I'd like to place an order.\n *Address:* ${address}\n\n *Products:*\n${cart
+  // Resumo de valores
+  const { cartSubtotal, addOnsTotal } = updateCartTotal();
+  let deliveryFee = 0;
+
+  // Informações de entrega
+  let message = `${currentDate}\n\n *Service type:* ${serviceType}\n-------------------------------------------\nHello, my name is ${name}, I'd like to place an order.\n *Address:* ${address}\n\n *Products:*\n${cart
     .map((item) => `${item.name}: £${item.price} x ${item.quantity}`)
     .join("\n")}\n\n *Observation:* ${observation}`;
 
-  // Informações de entrega ou coleta
-  let deliveryFee = 0;
-
   if (serviceType === "Delivery") {
-    message += `\n\n *Delivery Day:* ${deliveryDay}\n *Delivery Time:* ${deliveryTime}`;
+    if (deliveryLocation === "Portadown") deliveryFee = 5.0;
+    if (deliveryLocation === "Lugan") deliveryFee = 5.0;
+    if (deliveryLocation === "Craigavon") deliveryFee = 5.0;
+    if (deliveryLocation === "Dungannon") deliveryFee = 30.0;
+    if (deliveryLocation === "Belfast") deliveryFee = 30.0;
 
-    if (deliveryLocation === "Portadown") {
-      deliveryFee = 5.0;
-      message += `\n\n *Delivery Location:* Portadown\nDelivery Fee: £${deliveryFee.toFixed(
-        2
-      )}`;
-    } else if (deliveryLocation === "Lugan") {
-      deliveryFee = 5.0;
-      message += `\n\n *Delivery Location:* Lugan\nDelivery Fee: £${deliveryFee.toFixed(
-        2
-      )}`;
-    } else if (deliveryLocation === "Craigavon") {
-      deliveryFee = 5.0;
-      message += `\n\n *Delivery Location:* Craigavon\nDelivery Fee: £${deliveryFee.toFixed(
-        2
-      )}`;
-    } else if (deliveryLocation === "Dungannon") {
-      deliveryFee = 30.0;
-      message += `\n\n *Delivery Location:* Dungannon\nDelivery Fee: £${deliveryFee.toFixed(
-        2
-      )}`;
-    } else if (deliveryLocation === "Belfast") {
-      deliveryFee = 30.0;
-      message += `\n\n *Delivery Location:* Belfast\nDelivery Fee: £${deliveryFee.toFixed(
-        2
-      )}`;
-    } else {
-      message += `\n\n *What is the delivery fee for my address?*`;
-    }
+    message += `\n\n *Delivery Day:* ${deliveryDay}\n *Delivery Time:* ${deliveryTime}\n *Delivery Location:* ${deliveryLocation}\nDelivery Fee: £${deliveryFee.toFixed(
+      2
+    )}`;
   } else if (serviceType === "Pick-up") {
     message += `\n\n *Pick-up Day:* ${pickupDay}\n *Pick-up Time:* ${pickupTime}`;
   }
 
-  // Resumo de valores
-  const subtotal = cart.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
-  const addOnsTotal = Object.keys(addOns.drinks).reduce(
-    (acc, drink) => acc + addOns.drinks[drink] * itemPrices[drink],
-    addOns.creamCheese.selected ? itemPrices["Cream Cheese"] : 0
-  );
-  const total = subtotal + addOnsTotal + deliveryFee;
+  const total = cartSubtotal + addOnsTotal + deliveryFee;
 
-  message += `\n\n *Summary*\n\nSubtotal: £${subtotal.toFixed(
+  // Adicionar resumo
+  message += `\n\n *Summary*\n\nSubtotal: £${cartSubtotal.toFixed(
     2
   )}\nAdd-ons: £${addOnsTotal.toFixed(2)}\nDelivery: £${deliveryFee.toFixed(
     2
   )}\nTotal: £${total.toFixed(2)}`;
 
-  // Adicionais
+  // Detalhes dos add-ons
   let addOnsMessage = "\n\n *Add-ons:*\n";
   let hasAddOns = false;
 
@@ -377,12 +349,11 @@ document.getElementById("submit-order").addEventListener("click", function () {
     }
   }
 
-  if (addOns.creamCheese.selected) {
-    addOnsMessage += `Cream Cheese: £${itemPrices["Cream Cheese"]} x 1\n`;
-    if (addOns.creamCheese.pizzas) {
-      addOnsMessage += `Pizzas with Cream Cheese: ${addOns.creamCheese.pizzas}\n`;
+  for (const extra in addOns.extras) {
+    if (addOns.extras[extra] > 0) {
+      addOnsMessage += `${extra}: £${itemPrices[extra]} x ${addOns.extras[extra]}\n`;
+      hasAddOns = true;
     }
-    hasAddOns = true;
   }
 
   if (!hasAddOns) {

@@ -467,6 +467,7 @@
          </p>
       </div>
    </div>
+
    <!--========== MODAL ==========-->
    <div id="cart-modal" class="cart-modal">
       <div class="cart-modal-content">
@@ -563,7 +564,9 @@
          <!-- Step 2: Add-ons -->
          <div class="cart-form" id="form-step-2" style="display: none;">
             <h3>Add Drinks and Cream Cheese</h3>
-
+            <p id="status-modal-description" style="padding: 0.3rem;">
+               <strong>Drinks</strong>
+            </p>
             <!-- Drinks Section -->
             <div id="drinks">
                <div class="addon-item cart-item">
@@ -585,16 +588,19 @@
             </div>
 
             <!-- Add Cream Cheese Section -->
-            <div class="addon-section">
-               <div class="cream-cheese-wrapper">
-                  <label style="margin-bottom: 1rem;" class="custom-checkbox">
-                     <input type="checkbox" id="cream-cheese-check">
-                     <span class="checkmark"></span>
-                     Add Cream Cheese (£2)
-                  </label>
-                  <textarea id="cream-cheese-pizzas" style="/* display: block; *//* margin-top: 0rem; */ margin-bottom: 1rem;" placeholder="Specify pizzas for cream cheese"
-                     style="display: none; margin-top: 1rem;"></textarea>
+            <p id="status-modal-description" style="padding: 0.3rem;">
+               <strong>Cream Cheese</strong>
+            </p>
+            <div id="cream-cheese" class="addon-section">
+               <div class="addon-item cart-item">
+                  <span>Cream Cheese</span>
+                  <span>£2.0</span>
+                  <button class="addon-decrement" data-item="Cream Cheese">-</button>
+                  <span class="addon-quantity" data-item="Cream Cheese">0</span>
+                  <button class="addon-increment" data-item="Cream Cheese">+</button>
                </div>
+               <textarea id="cream-cheese-pizzas" placeholder="Specify pizzas for cream cheese"
+                  style="margin-top: 1rem; display: block;margin-bottom: 1rem;"></textarea>
             </div>
 
             <button id="submit-order" class="order-button">Place Order</button>
@@ -608,7 +614,7 @@
    <script src="assets/js/scrollreveal.min.js"></script>
 
    <!--=============== MAIN JS ===============-->
-   <script src="assets/js/main.js?v=2.0.3"></script>
+   <script src="assets/js/main.js?v=2.0.4"></script>
 
    <script>
       // Função para verificar o status da loja e atualizar a página
