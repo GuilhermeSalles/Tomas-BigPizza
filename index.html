@@ -563,7 +563,7 @@
 
          <!-- Step 2: Add-ons -->
          <div class="cart-form" id="form-step-2" style="display: none;">
-            <h3>Add Drinks and Cream Cheese</h3>
+            <h3>Add Drinks and Add-ons</h3>
             <p id="status-modal-description" style="padding: 0.3rem;">
                <strong>Drinks</strong>
             </p>
@@ -587,19 +587,28 @@
                </div>
             </div>
 
-            <!-- Add Cream Cheese Section -->
+            <!-- Add Add-ons Section -->
             <p id="status-modal-description" style="padding: 0.3rem;">
-               <strong>Cream Cheese</strong>
+               <strong>Add-ons</strong>
             </p>
             <div id="cream-cheese" class="addon-section">
                <div class="addon-item cart-item">
+                  <img src="assets/img/cream_cheese.png" alt="Coke Zero" class="addon-img">
                   <span>Cream Cheese</span>
                   <span>£2.0</span>
                   <button class="addon-decrement" data-item="Cream Cheese">-</button>
                   <span class="addon-quantity" data-item="Cream Cheese">0</span>
                   <button class="addon-increment" data-item="Cream Cheese">+</button>
                </div>
-               <textarea id="cream-cheese-pizzas" placeholder="Specify pizzas for cream cheese"
+               <div class="addon-item cart-item">
+                  <img src="assets/img/nutella.png" alt="Coke Zero" class="addon-img">
+                  <span>Nutella Border</span>
+                  <span>£2.0</span>
+                  <button class="addon-decrement" data-item="Nutella Border">-</button>
+                  <span class="addon-quantity" data-item="Nutella Border">0</span>
+                  <button class="addon-increment" data-item="Nutella Border">+</button>
+               </div>
+               <textarea id="cream-cheese-pizzas" placeholder="Specify pizzas for Cream Cheese and Nutella Border"
                   style="margin-top: 1rem; display: block;margin-bottom: 1rem;"></textarea>
             </div>
 

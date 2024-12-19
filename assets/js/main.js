@@ -189,6 +189,7 @@ let addOns = {
   },
   extras: {
     "Cream Cheese": 0,
+    "Nutella Border": 0,
   },
 };
 
@@ -196,6 +197,7 @@ const itemPrices = {
   Coke: 1.5,
   "Coke Zero": 1.5,
   "Cream Cheese": 2.0,
+  "Nutella Border": 2.0,
 };
 
 // =================== FUNÇÕES ===================
@@ -419,7 +421,7 @@ const itemInfo = {
   "Romeu & Julieta": {
     img: "assets/img/Romeu-Julieta.png",
     description:
-      "A sweet and savoury dessert pizza topped with mozzarella cheese, homemade fresh cheese, and guava paste, perfect for fans of the classic 'Romeo and Juliet' combination.",
+      "A sweet and savoury dessert pizza topped with mozzarella cheese, and guava paste, perfect for fans of the classic 'Romeo and Juliet' combination.",
   },
   "Banana & Nutella": {
     img: "assets/img/Banana-Nutella.png",
