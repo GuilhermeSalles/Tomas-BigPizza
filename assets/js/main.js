@@ -559,7 +559,6 @@ document.getElementById("service-type").addEventListener("change", function () {
     pickupTime.style.display = "none";
   }
 });
-
 /*=============== SELECT TIMES FOR DELIVERY OR PICK-UP ===============*/
 // Função para preencher horários no select
 function populateTimeSelect(selectId) {
@@ -571,11 +570,18 @@ function populateTimeSelect(selectId) {
   timeSelect.innerHTML = "";
 
   const startTime = 18; // 6 PM
+  const startMinutes = 30; // 30 minutes
   const endTime = 22; // 10 PM
-  const interval = 20;
+  const interval = 20; // Intervalo em minutos
 
-  for (let hour = startTime; hour < endTime; hour++) {
-    for (let minutes = 0; minutes < 60; minutes += interval) {
+  for (let hour = startTime; hour <= endTime; hour++) {
+    for (
+      let minutes = hour === startTime ? startMinutes : 0;
+      minutes < 60;
+      minutes += interval
+    ) {
+      if (hour === endTime && minutes > 0) break; // Garante que não ultrapasse 22:00
+
       const formattedHour = hour > 12 ? hour - 12 : hour;
       const period = hour >= 12 ? "PM" : "AM";
       const timeOption = `${formattedHour}:${
@@ -587,9 +593,4 @@ function populateTimeSelect(selectId) {
       timeSelect.appendChild(option);
     }
   }
-
-  const finalOption = document.createElement("option");
-  finalOption.value = "10:00 PM";
-  finalOption.textContent = "10:00 PM";
-  timeSelect.appendChild(finalOption);
 }
