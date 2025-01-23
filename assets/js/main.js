@@ -188,7 +188,7 @@ let addOns = {
     "Coke Zero": 0,
   },
   extras: {
-    "Cream Cheese": 0,
+    "Catupiry": 0,
     "Nutella Border": 0,
   },
 };
@@ -196,7 +196,7 @@ let addOns = {
 const itemPrices = {
   Coke: 1.5,
   "Coke Zero": 1.5,
-  "Cream Cheese": 2.0,
+  "Catupiry": 2.0,
   "Nutella Border": 2.0,
 };
 
@@ -427,6 +427,11 @@ const itemInfo = {
     img: "assets/img/Banana-Nutella.png",
     description:
       "A rich dessert pizza made with mozzarella cheese, homemade fresh cheese,powder milk ,Nutella spread, and banana slices, offering a delightful mix of fruit and chocolate.",
+  },
+  "Mineira": {
+    img: "assets/img/Mineira.png",
+    description:
+      "A delicious pizza topped with tomato sauce, mozzarella cheese, Paris mushroom, corn, bacon, Catupiry, and parmesan cheese.",
   },
 };
 
