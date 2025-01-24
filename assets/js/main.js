@@ -431,7 +431,7 @@ const itemInfo = {
   "Mineira": {
     img: "assets/img/Mineira.png",
     description:
-      "A delicious pizza topped with tomato sauce, mozzarella cheese, Paris mushroom, corn, bacon, Catupiry, and parmesan cheese.",
+      "A delicious pizza topped with tomato sauce, mozzarella cheese, Paris mushroom, corn, smoked bacon, Catupiry, and parmesan cheese, and black olives.",
   },
 };
 
