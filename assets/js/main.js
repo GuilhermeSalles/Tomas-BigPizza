@@ -188,7 +188,7 @@ let addOns = {
     "Coke Zero": 0,
   },
   extras: {
-    "Catupiry": 0,
+    Catupiry: 0,
     "Nutella Border": 0,
   },
 };
@@ -196,7 +196,7 @@ let addOns = {
 const itemPrices = {
   Coke: 1.5,
   "Coke Zero": 1.5,
-  "Catupiry": 2.0,
+  Catupiry: 2.0,
   "Nutella Border": 2.0,
 };
 
@@ -271,14 +271,14 @@ document
       updateCartTotal();
     });
   });
-
 // =================== ENVIAR PEDIDO ===================
 document.getElementById("submit-order").addEventListener("click", function () {
   const name = document.getElementById("customer-name").value;
   const address = document.getElementById("customer-address").value;
   const serviceType = document.getElementById("service-type").value;
   const paymentMethod = document.getElementById("payment-method").value;
-  const observation = document.getElementById("customer-observation").value;
+  const observation = document.getElementById("customer-observation").value; // Geral
+  const addonsObservation = document.getElementById("cream-cheese-observation").value; // Sobre addons
   const deliveryDay = document.getElementById("delivery-day-select").value;
   const deliveryTime = document.getElementById("delivery-time-select").value;
   const deliveryLocation = document.getElementById(
@@ -314,31 +314,8 @@ document.getElementById("submit-order").addEventListener("click", function () {
 
   // Informações de entrega
   let message = `${currentDate}\n\n *Service type:* ${serviceType}\n-------------------------------------------\nHello, my name is ${name}, I'd like to place an order.\n *Address:* ${address}\n\n *Products:*\n${cart
-    .map((item) => `${item.name}: £${item.price} x ${item.quantity}`)
-    .join("\n")}\n\n *Observation:* ${observation}`;
-
-  if (serviceType === "Delivery") {
-    if (deliveryLocation === "Portadown") deliveryFee = 5.0;
-    if (deliveryLocation === "Lugan") deliveryFee = 5.0;
-    if (deliveryLocation === "Craigavon") deliveryFee = 5.0;
-    if (deliveryLocation === "Dungannon") deliveryFee = 30.0;
-    if (deliveryLocation === "Belfast") deliveryFee = 30.0;
-
-    message += `\n\n *Delivery Day:* ${deliveryDay}\n *Delivery Time:* ${deliveryTime}\n *Delivery Location:* ${deliveryLocation}\nDelivery Fee: £${deliveryFee.toFixed(
-      2
-    )}`;
-  } else if (serviceType === "Pick-up") {
-    message += `\n\n *Pick-up Day:* ${pickupDay}\n *Pick-up Time:* ${pickupTime}`;
-  }
-
-  const total = cartSubtotal + addOnsTotal + deliveryFee;
-
-  // Adicionar resumo
-  message += `\n\n *Summary*\n\nSubtotal: £${cartSubtotal.toFixed(
-    2
-  )}\nAdd-ons: £${addOnsTotal.toFixed(2)}\nDelivery: £${deliveryFee.toFixed(
-    2
-  )}\nTotal: £${total.toFixed(2)}`;
+    .map((item) => `${item.name}: ${item.price} x ${item.quantity}`)
+    .join("\n")}`;
 
   // Detalhes dos add-ons
   let addOnsMessage = "\n\n *Add-ons:*\n";
@@ -346,14 +323,14 @@ document.getElementById("submit-order").addEventListener("click", function () {
 
   for (const drink in addOns.drinks) {
     if (addOns.drinks[drink] > 0) {
-      addOnsMessage += `${drink}: £${itemPrices[drink]} x ${addOns.drinks[drink]}\n`;
+      addOnsMessage += `${drink}: ${itemPrices[drink]} x ${addOns.drinks[drink]}\n`;
       hasAddOns = true;
     }
   }
 
   for (const extra in addOns.extras) {
     if (addOns.extras[extra] > 0) {
-      addOnsMessage += `${extra}: £${itemPrices[extra]} x ${addOns.extras[extra]}\n`;
+      addOnsMessage += `${extra}: ${itemPrices[extra]} x ${addOns.extras[extra]}\n`;
       hasAddOns = true;
     }
   }
@@ -363,6 +340,37 @@ document.getElementById("submit-order").addEventListener("click", function () {
   }
 
   message += addOnsMessage;
+
+  // Adicionar observações após os produtos e add-ons
+  if (observation) {
+    message += `\n*Observation:* ${observation}`;
+  }
+  if (addonsObservation) {
+    message += `\n*Add-ons Observation:* ${addonsObservation}`;
+  }
+
+  if (serviceType === "Delivery") {
+    if (deliveryLocation === "Portadown") deliveryFee = 5.0;
+    if (deliveryLocation === "Lugan") deliveryFee = 5.0;
+    if (deliveryLocation === "Craigavon") deliveryFee = 5.0;
+    if (deliveryLocation === "Dungannon") deliveryFee = 30.0;
+    if (deliveryLocation === "Belfast") deliveryFee = 30.0;
+
+    message += `\n\n *Delivery Day:* ${deliveryDay}\n *Delivery Time:* ${deliveryTime}\n *Delivery Location:* ${deliveryLocation}\nDelivery Fee: ${deliveryFee.toFixed(
+      2
+    )}`;
+  } else if (serviceType === "Pick-up") {
+    message += `\n\n *Pick-up Day:* ${pickupDay}\n *Pick-up Time:* ${pickupTime}`;
+  }
+
+  const total = cartSubtotal + addOnsTotal + deliveryFee;
+
+  // Adicionar resumo
+  message += `\n\n *Summary*\n\nSubtotal: ${cartSubtotal.toFixed(
+    2
+  )}\nAdd-ons: ${addOnsTotal.toFixed(2)}\nDelivery: ${deliveryFee.toFixed(
+    2
+  )}\nTotal: ${total.toFixed(2)}`;
 
   if (paymentMethod === "Bank Transfer") {
     message += `\n\n Payment Method: Bank Transfer\n\n*Here are my Nationwide account details:*\n\n*Name:* MR Tomas Recchia\n*Sort code:* 07-04-36\n*Account number:* 26000636`;
@@ -428,7 +436,7 @@ const itemInfo = {
     description:
       "A rich dessert pizza made with mozzarella cheese, homemade fresh cheese,powder milk ,Nutella spread, and banana slices, offering a delightful mix of fruit and chocolate.",
   },
-  "Mineira": {
+  Mineira: {
     img: "assets/img/Mineira.png",
     description:
       "A delicious pizza topped with tomato sauce, mozzarella cheese, Paris mushroom, corn, smoked bacon, Catupiry, and parmesan cheese, and black olives.",
