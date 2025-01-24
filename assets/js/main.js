@@ -356,7 +356,7 @@ document.getElementById("submit-order").addEventListener("click", function () {
     if (deliveryLocation === "Dungannon") deliveryFee = 30.0;
     if (deliveryLocation === "Belfast") deliveryFee = 30.0;
 
-    message += `\n\n *Delivery Day:* ${deliveryDay}\n *Delivery Time:* ${deliveryTime}\n *Delivery Location:* ${deliveryLocation}\nDelivery Fee: ${deliveryFee.toFixed(
+    message += `\n\n *Delivery Day:* ${deliveryDay}\n *Delivery Time:* ${deliveryTime}\n *Delivery Location:* ${deliveryLocation}\n *Delivery Fee:* ${deliveryFee.toFixed(
       2
     )}`;
   } else if (serviceType === "Pick-up") {
@@ -373,7 +373,7 @@ document.getElementById("submit-order").addEventListener("click", function () {
   )}\nTotal: ${total.toFixed(2)}`;
 
   if (paymentMethod === "Bank Transfer") {
-    message += `\n\n Payment Method: Bank Transfer\n\n*Here are my Nationwide account details:*\n\n*Name:* MR Tomas Recchia\n*Sort code:* 07-04-36\n*Account number:* 26000636`;
+    message += `\n\n *Payment Method:* Bank Transfer\n\n*Here are my Nationwide account details:*\n\n*Name:* MR Tomas Recchia\n*Sort code:* 07-04-36\n*Account number:* 26000636`;
   } else if (paymentMethod === "Cash") {
     message += `\n\n *Payment Method: Cash*`;
   }
