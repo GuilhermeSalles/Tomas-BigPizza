@@ -278,7 +278,9 @@ document.getElementById("submit-order").addEventListener("click", function () {
   const serviceType = document.getElementById("service-type").value;
   const paymentMethod = document.getElementById("payment-method").value;
   const observation = document.getElementById("customer-observation").value; // Geral
-  const addonsObservation = document.getElementById("cream-cheese-observation").value; // Sobre addons
+  const addonsObservation = document.getElementById(
+    "cream-cheese-observation"
+  ).value; // Sobre addons
   const deliveryDay = document.getElementById("delivery-day-select").value;
   const deliveryTime = document.getElementById("delivery-time-select").value;
   const deliveryLocation = document.getElementById(
@@ -415,6 +417,11 @@ const itemInfo = {
     img: "assets/img/Chicken_special.png",
     description:
       "A hearty pizza with tomato sauce, mozzarella cheese, oregano, sweet corn, shredded chicken, bacon, and black olives.",
+  },
+  "Pizza doce Oreo": {
+    img: "assets/img/Oreo-Pizza.png",
+    description:
+      "A decadent dessert pizza with melted mozzarella cheese, milk chocolate, crunchy Oreo cookies, and creamy white chocolate with hazelnuts for a sweet indulgence.",
   },
   "Strogonoff special": {
     img: "assets/img/Strogonoff-special.png",
