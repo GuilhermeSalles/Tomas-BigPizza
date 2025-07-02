@@ -9,6 +9,7 @@ Este projeto é o site oficial da **Tomas Big Pizza**, desenvolvido para oferece
 - 🛒 **Sistema de Pedidos**: Plataforma de pedidos integrada, facilitando a compra online.
 - 🖼️ **Galeria de Imagens**: Exibição de fotos das deliciosas pizzas e do ambiente.
 - 📍 **Localização e Contato**: Informações da localização da pizzaria e opções de contato.
+- 📊 **Painel Administrativo**: Dashboard protegido para acompanhar pedidos, totais vendidos e gerenciar o status da loja.
 
 ## 🛠️ Tecnologias Utilizadas
 - 🌐 **HTML5**: Estrutura de páginas.
@@ -23,6 +24,7 @@ Para executar localmente este projeto:
    ```
 2. **Configuração do Ambiente**:
    Certifique-se de ter as dependências necessárias instaladas (HTML, CSS, JavaScript).
+   Para habilitar o painel administrativo, crie a tabela `orders` em seu banco de dados MySQL executando o script `create_tables.sql`.
 3. **Execução**:
    Abra o arquivo `index.html` no seu navegador para visualizar o site.
 

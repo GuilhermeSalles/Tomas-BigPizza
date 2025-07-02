@@ -381,6 +381,32 @@ document.getElementById("submit-order").addEventListener("click", function () {
   }
 
   const whatsappMessage = encodeURIComponent(message);
+  const orderPayload = {
+    name,
+    address,
+    serviceType,
+    paymentMethod,
+    observation,
+    addonsObservation,
+    deliveryDay,
+    deliveryTime,
+    deliveryLocation,
+    pickupDay,
+    pickupTime,
+    cart,
+    addOns,
+    cartSubtotal,
+    addOnsTotal,
+    deliveryFee,
+    total,
+  };
+
+  fetch("submit_order.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(orderPayload),
+  });
+
   window.open(`https://wa.me/447707763804?text=${whatsappMessage}`, "_blank");
 });
 

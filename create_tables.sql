@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(255),
+    customer_address VARCHAR(255),
+    service_type VARCHAR(50),
+    payment_method VARCHAR(50),
+    observation TEXT,
+    addons_observation TEXT,
+    delivery_day VARCHAR(50),
+    delivery_time VARCHAR(50),
+    delivery_location VARCHAR(50),
+    pickup_day VARCHAR(50),
+    pickup_time VARCHAR(50),
+    items TEXT,
+    add_ons TEXT,
+    cart_subtotal DECIMAL(10,2),
+    addons_total DECIMAL(10,2),
+    delivery_fee DECIMAL(10,2),
+    total DECIMAL(10,2),
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
